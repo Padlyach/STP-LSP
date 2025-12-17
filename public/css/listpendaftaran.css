@@ -1,0 +1,66 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+* {
+            scroll-behavior: smooth;
+        }
+
+        
+        .gradient-header {
+            background: linear-gradient(135deg, #0E7A4F 0%, #10B981 100%);
+            box-shadow: 0 10px 30px rgba(14, 122, 79, 0.2);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .card-shadow:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0E7A4F 0%, #10B981 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(14, 122, 79, 0.3);
+        }
+        
+        .table-row-hover:hover {
+            background-color: #f0fdf4;
+            transition: all 0.2s ease;
+        }
+        
+        .badge-competency {
+            background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+            color: #065F46;
+        }
+        
+        .action-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .action-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .search-box {
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus {
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }

@@ -1,0 +1,352 @@
+   * {
+            scroll-behavior: smooth;
+        }
+
+
+        /* ===== IMPROVED SECTION STYLES ===== */
+        .section-container {
+            padding: 3rem 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(209, 250, 229, 0.2) 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-badge {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #0E7A4F;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: linear-gradient(135deg, #D1FAE5, #A7F3D0);
+            border-radius: 50px;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            font-weight: 800;
+            color: #1F2937;
+            letter-spacing: -0.5px;
+            margin-top: 0.5rem;
+        }
+
+        /* ===== ASESOR CARDS ===== */
+        .asesor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .asesor-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            position: relative;
+        }
+
+        .asesor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0E7A4F, #10B981);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+        }
+
+        .asesor-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .asesor-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(14, 122, 79, 0.18), 0 0 1px rgba(14, 122, 79, 0.3);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        /* Photo Area */
+        .asesor-photo-area {
+            height: 220px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(209, 250, 229, 0.12) 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 3px solid #10B981;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .asesor-card:hover .asesor-photo-area {
+            background: linear-gradient(135deg, rgba(14, 122, 79, 0.12) 0%, rgba(16, 185, 129, 0.15) 100%);
+            border-bottom-color: #0E7A4F;
+        }
+
+        .asesor-photo-placeholder {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10B981, #D1FAE5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid white;
+            box-shadow: 0 8px 20px rgba(14, 122, 79, 0.25);
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .asesor-card:hover .asesor-photo-placeholder {
+            transform: scale(1.08);
+            box-shadow: 0 12px 28px rgba(14, 122, 79, 0.35);
+        }
+
+        /* Content Area */
+        .asesor-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .asesor-info {
+            margin-bottom: 0.5rem;
+        }
+
+        .asesor-name {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #1F2937;
+            line-height: 1.3;
+            margin-bottom: 0.4rem;
+            transition: color 0.3s ease;
+        }
+
+        .asesor-card:hover .asesor-name {
+            color: #0E7A4F;
+        }
+
+        .asesor-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #6B7280;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .asesor-card:hover .asesor-title {
+            color: #0E7A4F;
+        }
+
+        /* Registration Number */
+        .asesor-registration {
+            padding-top: 1rem;
+            border-top: 2px solid #F3F4F6;
+            transition: all 0.3s ease;
+        }
+
+        .asesor-card:hover .asesor-registration {
+            border-top-color: #D1FAE5;
+        }
+
+        .asesor-reg-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #9CA3AF;
+            letter-spacing: 0.4px;
+            margin-bottom: 0.4rem;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .asesor-card:hover .asesor-reg-label {
+            color: #6B7280;
+        }
+
+        .asesor-reg-number {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #3B82F6;
+            letter-spacing: 0.2px;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            background: rgba(59, 130, 246, 0.08);
+            border-radius: 0.375rem;
+        }
+
+        .asesor-card:hover .asesor-reg-number {
+            background: rgba(59, 130, 246, 0.15);
+            transform: translateX(2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .asesor-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .asesor-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.25rem;
+            }
+
+            .section-container {
+                padding: 2rem 0;
+            }
+
+            .section-header {
+                margin-bottom: 2.5rem;
+            }
+
+            .asesor-photo-area {
+                height: 180px;
+            }
+
+            .asesor-content {
+                padding: 1.25rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .asesor-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1rem;
+            }
+
+            .section-container {
+                padding: 1.5rem 0;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .asesor-photo-area {
+                height: 150px;
+            }
+
+            .asesor-photo-placeholder {
+                width: 110px;
+                height: 110px;
+                font-size: 1rem;
+                border-width: 4px;
+            }
+
+            .asesor-name {
+                font-size: 0.9rem;
+            }
+
+            .asesor-content {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .asesor-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section-badge {
+                font-size: 0.75rem;
+                padding: 0.4rem 1rem;
+            }
+        }
+
+        /* Stagger animation for cards */
+        .asesor-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .asesor-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .asesor-card:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .asesor-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .asesor-card:nth-child(4) {
+            animation-delay: 0.25s;
+        }
+
+        .asesor-card:nth-child(5) {
+            animation-delay: 0.3s;
+        }
+
+        .asesor-card:nth-child(6) {
+            animation-delay: 0.35s;
+        }
+
+        .asesor-card:nth-child(7) {
+            animation-delay: 0.4s;
+        }
+
+        .asesor-card:nth-child(8) {
+            animation-delay: 0.45s;
+        }
+
+        .asesor-card:nth-child(9) {
+            animation-delay: 0.5s;
+        }
+
+        .asesor-card:nth-child(10) {
+            animation-delay: 0.55s;
+        }
