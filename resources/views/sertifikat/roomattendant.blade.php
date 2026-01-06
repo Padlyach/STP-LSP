@@ -136,7 +136,7 @@
             <section class="sidebar-section animate-in-left">
                 <div class="image-frame">
                     <div class="image-content">
-                        <img  src="/build/assets/image/stpimage3.jpg" alt="Room Attendant Profesional">
+                        <img   src="{{ asset('image/stpimage3.jpg') }}" alt="Room Attendant Profesional">
                     </div>
                 </div>
 

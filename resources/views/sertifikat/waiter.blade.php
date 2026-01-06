@@ -136,7 +136,7 @@
             <section class="sidebar-section animate-in-left">
                 <div class="image-frame">
                     <div class="image-content">
-                        <img src="/build/assets/image/stpimage2.jpg" alt="Waiter Profesional">
+                        <img src="{{ asset('image/stpimage2.jpg') }}"alt="Waiter Profesional">
                     </div>
                 </div>
 

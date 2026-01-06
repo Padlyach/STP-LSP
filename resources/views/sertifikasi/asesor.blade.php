@@ -148,7 +148,7 @@
 
                     <div class="asesor-card">
                         <div class="asesor-photo-area">
-                            <img src="/build/assets/image/img1.png" alt="Foto Asesor"
+                            <img  src="{{ asset('image/img1.png') }}" alt="Foto Asesor"
                                 class="w-40 h-40 object-cover rounded-full border-4 border-white shadow-lg">
                         </div>
                         <div class="asesor-content">
@@ -165,7 +165,7 @@
 
                     <div class="asesor-card">
                         <div class="asesor-photo-area">
-                            <img src="/build/assets/image/img2.png" alt="Foto Asesor"
+                            <img src="{{ asset('image/img2.png') }}" alt="Foto Asesor"
                                 class="w-40 h-40 object-cover rounded-full border-4 border-white shadow-lg">
                         </div>
                         <div class="asesor-content">
@@ -179,10 +179,10 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="asesor-card">
                         <div class="asesor-photo-area">
-                            <img src="/build/assets/image/img3.png" alt="Foto Asesor"
+                            <img src="{{ asset('image/img3.png') }}" alt="Foto Asesor"
                                 class="w-40 h-40 object-cover rounded-full border-4 border-white shadow-lg">
                         </div>
                         <div class="asesor-content">
@@ -199,7 +199,7 @@
 
                     <div class="asesor-card">
                         <div class="asesor-photo-area">
-                            <img src="/build/assets/image/img4.png" alt="Foto Asesor"
+                            <img src="{{ asset('image/img4.png') }}" alt="Foto Asesor"
                                 class="w-40 h-40 object-cover rounded-full border-4 border-white shadow-lg">
                         </div>
                         <div class="asesor-content">
@@ -216,7 +216,7 @@
                     
                     <div class="asesor-card">
                         <div class="asesor-photo-area">
-                            <img src="/build/assets/image/img5.png" alt="Foto Asesor"
+                            <img src="{{ asset('image/img5.png') }}" alt="Foto Asesor"
                                 class="w-40 h-40 object-cover rounded-full border-4 border-white shadow-lg">
                         </div>
                         <div class="asesor-content">
@@ -233,7 +233,7 @@
 
                     <div class="asesor-card">
                            <div class="asesor-photo-area">
-                            <img src="/build/assets/image/img6.png" alt="Foto Asesor"
+                            <img src="{{ asset('image/img6.png') }}" alt="Foto Asesor"
                                 class="w-40 h-40 object-cover rounded-full border-4 border-white shadow-lg">
                         </div>
                         <div class="asesor-content">
@@ -250,7 +250,7 @@
 
                     <div class="asesor-card">
                       <div class="asesor-photo-area">
-                            <img src="/build/assets/image/img7.png" alt="Foto Asesor"
+                            <img src="{{ asset('image/img7.png') }}" alt="Foto Asesor"
                                 class="w-40 h-40 object-cover rounded-full border-4 border-white shadow-lg">
                         </div>
                         <div class="asesor-content">
@@ -267,7 +267,7 @@
 
                     <div class="asesor-card">
                         <div class="asesor-photo-area">
-                            <img src="/build/assets/image/img8.png" alt="Foto Asesor"
+                            <img src="{{ asset('image/img8.png') }}" alt="Foto Asesor"
                                 class="w-40 h-40 object-cover rounded-full border-4 border-white shadow-lg">
                         </div>
                         <div class="asesor-content">
@@ -284,7 +284,7 @@
 
                     <div class="asesor-card">
                       <div class="asesor-photo-area">
-                            <img src="/build/assets/image/img10.png" alt="Foto Asesor"
+                            <img src="{{ asset('image/img10.png') }}" alt="Foto Asesor"
                                 class="w-40 h-40 object-cover rounded-full border-4 border-white shadow-lg">
                         </div>
                         <div class="asesor-content">
@@ -301,7 +301,7 @@
 
                     <div class="asesor-card">
                        <div class="asesor-photo-area">
-                            <img src="/build/assets/image/img9.png" alt="Foto Asesor"
+                            <img src="{{ asset('image/img9.png') }}" alt="Foto Asesor"
                                 class="w-40 h-40 object-cover rounded-full border-4 border-white shadow-lg">
                         </div>
                         <div class="asesor-content">

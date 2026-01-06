@@ -9,13 +9,11 @@
 </head>
 <body>
 
-<nav class="nav-sticky">
+<nav id="navbar" class="nav-sticky navbar-transparent">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center py-3 lg:py-4">
 
-            <!-- Logo dengan Gambar Asset -->
-<div class="flex items-center space-x-2 lg:space-x-3 group">
-<!-- Anchor tag ditambahkan di sini untuk membuat gambar bisa diklik -->
+            <div class="flex items-center space-x-2 lg:space-x-3 group">
 <a href="{{ route('beranda') }}" class="block">
 <img src="{{ asset('image/logostp.webp') }}"
 alt="Logo LSP"
@@ -23,17 +21,14 @@ class=" object-contain transition-transform duration-300 group-hover:scale-110">
 </a>
 </div>
 
-            <!-- DESKTOP MENU -->
             <ul class="hidden lg:flex items-center space-x-1 text-sm font-medium">
 
-                <!-- BERANDA -->
                 <li>
                     <a href="{{ route('beranda') }}" class="nav-link">
                        Beranda
                     </a>
                 </li>
 
-                <!-- PROFIL DROPDOWN -->
                 <li class="dropdown relative group">
                     <a class="nav-link flex items-center cursor-pointer">
                         Profil
@@ -47,28 +42,36 @@ class=" object-contain transition-transform duration-300 group-hover:scale-110">
 
                     <div class="dropdown-menu absolute left-0 mt-0 w-56 bg-white rounded-lg shadow-2xl border border-gray-100 py-2">
                         <a href="{{ route('profil.tentang') }}" class="dropdown-item">
-                            <span class="dropdown-icon">📋</span>
+                            <span class="dropdown-icon text-primary">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            </span>
                             <div>
                                 <div class="font-semibold text-gray-900">Tentang</div>
                                 <div class="text-xs text-gray-500">Profil Perusahaan</div>
                             </div>
                         </a>
                         <a href="{{ route('profil.visi') }}" class="dropdown-item">
-                            <span class="dropdown-icon">🎯</span>
+                            <span class="dropdown-icon text-primary">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            </span>
                             <div>
                                 <div class="font-semibold text-gray-900">Visi & Misi</div>
                                 <div class="text-xs text-gray-500">Tujuan Organisasi</div>
                             </div>
                         </a>
                         <a href="{{ route('profil.dasarhukum') }}" class="dropdown-item">
-                            <span class="dropdown-icon">🏛️</span>
+                            <span class="dropdown-icon text-primary">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
+                            </span>
                             <div>
                                 <div class="font-semibold text-gray-900">Dasar Hukum</div>
                                 <div class="text-xs text-gray-500">Landasan Operasional</div>
                             </div>
                         </a>
                         <a href="{{ route('profil.ruanglingkup') }}" class="dropdown-item">
-                            <span class="dropdown-icon">🔍</span>
+                            <span class="dropdown-icon text-primary">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                            </span>
                             <div>
                                 <div class="font-semibold text-gray-900">Ruang Lingkup</div>
                                 <div class="text-xs text-gray-500">Cakupan Layanan</div>
@@ -77,7 +80,6 @@ class=" object-contain transition-transform duration-300 group-hover:scale-110">
                     </div>
                 </li>
 
-                <!-- SERTIFIKASI DROPDOWN -->
                 <li class="dropdown relative group">
                     <a class="nav-link flex items-center cursor-pointer">
                         Sertifikasi
@@ -91,72 +93,88 @@ class=" object-contain transition-transform duration-300 group-hover:scale-110">
 
                     <div class="dropdown-menu absolute left-0 mt-0 w-56 bg-white rounded-lg shadow-2xl border border-gray-100 py-2">
                         <a href="{{ route('sertifikasi.pemegangsertifikat') }}" class="dropdown-item">
-                            <span class="dropdown-icon">🏆</span>
+                            <span class="dropdown-icon text-primary">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </span>
                             <div>
                                 <div class="font-semibold text-gray-900">Pemegang Sertifikat</div>
                                 <div class="text-xs text-gray-500">Data Tersertifikasi</div>
                             </div>
                         </a>
                         <a href="{{ route('sertifikasi.asesor') }}" class="dropdown-item">
-                            <span class="dropdown-icon">🧑‍🏫</span>
+                            <span class="dropdown-icon text-primary">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                            </span>
                             <div>
                                 <div class="font-semibold text-gray-900">Asesor Kompetensi</div>
                                 <div class="text-xs text-gray-500">Tim Penguji</div>
                             </div>
                         </a>
                         <a href="{{ route('sertifikasi.jadwaluji') }}" class="dropdown-item">
-                            <span class="dropdown-icon">📅</span>
+                            <span class="dropdown-icon text-primary">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            </span>
                             <div>
                                 <div class="font-semibold text-gray-900">Jadwal Uji Kompetensi</div>
                                 <div class="text-xs text-gray-500">Agenda Pengujian</div>
                             </div>
                         </a>
                         <a href="{{ route('sertifikasi.tempatuji') }}" class="dropdown-item">
-                            <span class="dropdown-icon">📍</span>
+                            <span class="dropdown-icon text-primary">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </span>
                             <div>
                                 <div class="font-semibold text-gray-900">Tempat Uji Kompetensi</div>
                                 <div class="text-xs text-gray-500">Lokasi Pengujian</div>
                             </div>
                         </a>
                         <a href="{{ route('sertifikat.berita') }}" class="dropdown-item">
-    <span class="dropdown-icon">📰</span> <div>
-        <div class="font-semibold text-gray-900">Berita Pendaftaran Sertifikat</div>
-        <div class="text-xs text-gray-500">Informasi Terbaru Pendaftar</div>
-    </div>
-</a>
+                            <span class="dropdown-icon text-primary">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 4v4h4"/></svg>
+                            </span>
+                            <div>
+                                <div class="font-semibold text-gray-900">Berita Pendaftaran Sertifikat</div>
+                                <div class="text-xs text-gray-500">Informasi Terbaru Pendaftar</div>
+                            </div>
+                        </a>
                     </div>
                 </li>
 
-                <!-- LINK BIASA -->
                 <li><a href="{{ route('galeri') }}" class="nav-link">Galeri</a></li>
                 <li><a href="{{ route('kontak') }}" class="nav-link">Kontak</a></li>
                 <li><a href="{{ route('pendaftaran') }}" class="nav-link-primary">Pendaftaran</a></li>
-                <li><a href="{{ route('login') }}" class="nav-link-primary">Login</a></li>
-                   <form method="POST" action="{{ route('logout') }}">
+             {{-- Jika BELUM login --}}
+@guest
+<li>
+    <a href="{{ route('login') }}" class="nav-link-primary">
+        Login
+    </a>
+</li>
+@endguest
+
+{{-- Jika SUDAH login --}}
+@auth
+<form method="POST" action="{{ route('logout') }}">
     @csrf
     <li>
-        {{-- Menggunakan tag <a> dengan class styling --}}
-        {{-- Atribut href bisa diisi '#' atau diisi route('logout') --}}
-        <a href="{{ route('logout') }}" 
-           class="nav-link-primary" 
+        <a href="{{ route('logout') }}"
+           class="nav-link-primary"
            onclick="event.preventDefault(); this.closest('form').submit();">
-            {{ __('LogOut') }}
+            Logout
         </a>
     </li>
 </form>
+@endauth
             </ul>
 
-            <!-- SOCIAL MEDIA DESKTOP -->
             <div class="hidden lg:flex items-center space-x-3">
 
-                <!-- Facebook -->
                 <a href="#" class="social-icon" title="Facebook">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M22.676 0H1.326C.595 0 0 .6 0 1.333v21.333C0 23.4.595 24 1.326 24H12.82v-9.333H9.692v-3.64h3.128V8.41c0-3.1 1.893-4.788 4.66-4.788 1.325 0 2.464.1 2.796.145v3.24l-1.92.001c-1.504 0-1.795.726-1.795 1.77v2.318h3.587l-.467 3.64h-3.12V24h6.118C23.405 24 24 23.4 24 22.667V1.333C24 .6 23.405 0 22.676 0z" />
                     </svg>
                 </a>
 
-                <!-- Instagram -->
                 <a href="#" class="social-icon" title="Instagram">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.056 1.97.24 2.428.403a4.92 4.92 0 0 1 1.77 1.153 4.92 4.92 0 0 1 1.153 1.77c.163.457.347 1.257.403 2.428.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.24 1.97-.403 2.428a4.92 4.92 0 0 1-1.153 1.77 4.92 4.92 0 0 1-1.77 1.153c-.457.163-1.257.347-2.428.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.97-.24-2.428-.403a4.92 4.92 0 0 1-1.77-1.153 4.92 4.92 0 0 1-1.153-1.77c-.163-.457-.347-1.257-.403-2.428C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.056-1.17.24-1.97.403-2.428a4.92 4.92 0 0 1 1.153-1.77A4.92 4.92 0 0 1 5.559.566c.457-.163 1.257-.347 2.428-.403C9.253 2.174 9.633 2.163 12 2.163z" />
@@ -164,7 +182,6 @@ class=" object-contain transition-transform duration-300 group-hover:scale-110">
                 </a>
             </div>
 
-            <!-- MOBILE BUTTON -->
             <button id="mobile-menu-btn" class="lg:hidden text-gray-700 hover:text-primary transition-colors duration-300 p-2 hover:bg-gray-100 rounded-lg">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -172,12 +189,10 @@ class=" object-contain transition-transform duration-300 group-hover:scale-110">
             </button>
         </div>
 
-        <!-- MOBILE MENU -->
         <div id="mobile-menu" class="mobile-menu lg:hidden bg-white border-t border-gray-100">
 
             <a href="{{ route('beranda') }}" class="mobile-link">Beranda</a>
 
-            <!-- MOBILE DROPDOWN PROFIL -->
             <div class="mobile-dropdown">
                 <button class="mobile-dropdown-btn">
                     Profil
@@ -186,14 +201,25 @@ class=" object-contain transition-transform duration-300 group-hover:scale-110">
                     </svg>
                 </button>
                 <div class="mobile-submenu">
-                    <a href="{{ route('profil.tentang') }}" class="mobile-sublink">📋 Tentang</a>
-                    <a href="{{ route('profil.visi') }}" class="mobile-sublink">🎯 Visi & Misi</a>
-                    <a href="{{ route('profil.dasarhukum') }}" class="mobile-sublink">🏛️ Dasar Hukum</a>
-                    <a href="{{ route('profil.ruanglingkup') }}" class="mobile-sublink">🔍 Ruang Lingkup</a>
+                    <a href="{{ route('profil.tentang') }}" class="mobile-sublink flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        Tentang
+                    </a>
+                    <a href="{{ route('profil.visi') }}" class="mobile-sublink flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        Visi & Misi
+                    </a>
+                    <a href="{{ route('profil.dasarhukum') }}" class="mobile-sublink flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
+                        Dasar Hukum
+                    </a>
+                    <a href="{{ route('profil.ruanglingkup') }}" class="mobile-sublink flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        Ruang Lingkup
+                    </a>
                 </div>
             </div>
 
-            <!-- MOBILE DROPDOWN SERTIFIKASI -->
             <div class="mobile-dropdown">
                 <button class="mobile-dropdown-btn">
                     Sertifikasi
@@ -203,11 +229,26 @@ class=" object-contain transition-transform duration-300 group-hover:scale-110">
                 </button>
 
                 <div class="mobile-submenu">
-                    <a href="{{ route('sertifikasi.pemegangsertifikat') }}" class="mobile-sublink">🏆 Pemegang Sertifikat</a>
-                    <a href="{{ route('sertifikasi.asesor') }}" class="mobile-sublink">🧑‍🏫 Asesor Kompetensi</a>
-                    <a href="{{ route('sertifikasi.jadwaluji') }}" class="mobile-sublink">📅 Jadwal Uji Kompetensi</a>
-                    <a href="{{ route('sertifikasi.tempatuji') }}" class="mobile-sublink">📍 Tempat Uji Kompetensi</a>
-                    <a href="{{ route('sertifikat.berita') }}" class="mobile-sublink">📰 Berita Pendaftaran Sertifikat</a>
+                    <a href="{{ route('sertifikasi.pemegangsertifikat') }}" class="mobile-sublink flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Pemegang Sertifikat
+                    </a>
+                    <a href="{{ route('sertifikasi.asesor') }}" class="mobile-sublink flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        Asesor Kompetensi
+                    </a>
+                    <a href="{{ route('sertifikasi.jadwaluji') }}" class="mobile-sublink flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        Jadwal Uji Kompetensi
+                    </a>
+                    <a href="{{ route('sertifikasi.tempatuji') }}" class="mobile-sublink flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        Tempat Uji Kompetensi
+                    </a>
+                    <a href="{{ route('sertifikat.berita') }}" class="mobile-sublink flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 4v4h4"/></svg>
+                        Berita Pendaftaran Sertifikat
+                    </a>
                 </div>
           
             </div>
@@ -229,10 +270,7 @@ class=" object-contain transition-transform duration-300 group-hover:scale-110">
 </form>
              
             
-                        <!-- Authentication -->
-                        
-            <!-- Social Media Mobile -->
-            <div class="border-t border-gray-100 pt-4 pb-2 px-4 mt-4">
+                        <div class="border-t border-gray-100 pt-4 pb-2 px-4 mt-4">
                 <p class="text-xs font-semibold text-gray-600 mb-3">Follow Us</p>
                 <div class="flex space-x-3">
                     <a href="#" class="social-icon-mobile" title="Twitter">
@@ -393,10 +431,15 @@ class=" object-contain transition-transform duration-300 group-hover:scale-110">
     }
 
     .dropdown-icon {
-        font-size: 1.25rem;
         display: flex;
         align-items: center;
+        justify-content: center;
         min-width: 30px;
+        color: var(--color-primary);
+    }
+
+    .text-primary {
+        color: var(--color-primary);
     }
 
     /* Social Icons */
@@ -536,7 +579,8 @@ class=" object-contain transition-transform duration-300 group-hover:scale-110">
     }
 
     .mobile-sublink {
-        display: block;
+        display: flex;
+        align-items: center;
         padding: 0.875rem 1.5rem;
         font-size: 0.95rem;
         color: #4b5563;

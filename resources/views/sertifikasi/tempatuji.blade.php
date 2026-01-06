@@ -147,7 +147,7 @@
                     <!-- CARD 1 -->
                     <div class="gallery-card">
                         <div class="image-placeholder">
-                            <img src="/build/assets/image/stpdapur.jpg" alt="Dapur Uji Kompetensi Commis Pastry">
+                            <img src="{{ asset('image/stpdapur.jpg') }}" alt="Dapur Uji Kompetensi Commis Pastry">
                         </div>
                         <div class="card-content">
                             <h4 class="card-title">Dapur Uji - Commis Pastry</h4>
@@ -161,7 +161,7 @@
                     <!-- CARD 2 -->
                     <div class="gallery-card">
                         <div class="image-placeholder">
-                            <img src="/build/assets/image/stprecepsionist.jpg" alt="Lokasi Uji Kompetensi Receptionist">
+                            <img src="{{ asset('image/stprecepsionist.jpg') }}" alt="Lokasi Uji Kompetensi Receptionist">
                         </div>
                         <div class="card-content">
                             <h4 class="card-title">Simulasi Front Office</h4>
@@ -175,7 +175,7 @@
                     <!-- CARD 3 -->
                     <div class="gallery-card">
                         <div class="image-placeholder">
-                            <img src="/build/assets/image/stpkamar.jpg" alt="Lokasi Uji Kompetensi Room Attendant">
+                            <img src="{{ asset('image/stpkamar.jpg') }}" alt="Lokasi Uji Kompetensi Room Attendant">
                         </div>
                         <div class="card-content">
                             <h4 class="card-title">Kamar Hotel - Room Service</h4>
@@ -189,7 +189,7 @@
                     <!-- CARD 4 -->
                     <div class="gallery-card">
                         <div class="image-placeholder">
-                            <img src="/build/assets/image/stpresto.jpg" alt="Lokasi Uji Kompetensi Waiter">
+                            <img src="{{ asset('image/stpresto.jpg') }}" alt="Lokasi Uji Kompetensi Waiter">
                         </div>
                         <div class="card-content">
                             <h4 class="card-title">Restoran Pelatihan</h4>
@@ -203,7 +203,7 @@
                     <!-- CARD 5 -->
                     <div class="gallery-card">
                         <div class="image-placeholder">
-                            <img src="/build/assets/image/stpruangbrefing.jpg" alt="Lokasi Uji Kompetensi Ruang Briefing">
+                            <img src="{{ asset('image/stpruangbrefing.jpg') }}" alt="Lokasi Uji Kompetensi Ruang Briefing">
                         </div>
                         <div class="card-content">
                             <h4 class="card-title">Ruang Briefing Asesor</h4>
@@ -217,7 +217,7 @@
                     <!-- CARD 6 -->
                     <div class="gallery-card">
                         <div class="image-placeholder">
-                            <img src="/build/assets/image/stpruangtunggu.jpg" alt="Lokasi Uji Kompetensi Area Tunggu">
+                            <img src="{{ asset('image/stpruangtunggu.jpg') }}" alt="Lokasi Uji Kompetensi Area Tunggu">
                         </div>
                         <div class="card-content">
                             <h4 class="card-title">Area Tunggu Peserta Uji</h4>

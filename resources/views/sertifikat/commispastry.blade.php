@@ -139,7 +139,7 @@
             <section class="sidebar-section animate-in-left">
                 <div class="image-frame">
                     <div class="image-content">
-                        <img src="/build/assets/image/stpimage4.jpg" alt="Commis Pastry">
+                        <img  src="{{ asset('image/stpimage4.jpg') }}" alt="Commis Pastry">
                     </div>
                 </div>
 

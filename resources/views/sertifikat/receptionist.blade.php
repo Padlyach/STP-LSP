@@ -141,7 +141,7 @@
                 <!-- Gambar -->
                 <div class="image-frame">
                     <div class="image-content">
-                        <img src="/build/assets/image/stpimage1.jpg" alt="Resepsionis Professional">
+                        <img  src="{{ asset('image/stpimage1.jpg') }}" alt="Resepsionis Professional">
                     </div>
                 </div>
 

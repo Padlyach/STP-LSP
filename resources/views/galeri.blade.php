@@ -415,7 +415,7 @@
                     
                   <div class="gallery-card">
     <div class="gallery-card-image">
-        <img src="{{ asset('build/assets/image/galeri1.jpg') }}" alt="Uji Skema Receptionist">
+        <img src="{{ asset('image/galeri1.jpg') }}" alt="Uji Skema Receptionist">
         <span class="gallery-card-badge">Foto</span>
     </div>
     <div class="gallery-card-content">
@@ -427,7 +427,7 @@
 
                     <div class="gallery-card">
                         <div class="gallery-card-image">
-                            <img src="{{ asset('build/assets/image/galeri2.jpg') }}" alt="Sesi Penilaian Dapur Pastry">
+                            <img src="{{ asset('image/galeri2.jpg') }}" alt="Sesi Penilaian Dapur Pastry">
                             <span class="gallery-card-badge">Foto</span>
                         </div>
                         <div class="gallery-card-content">
@@ -438,7 +438,7 @@
                     
                     <div class="gallery-card">
                         <div class="gallery-card-image">
-                            <img src="{{ asset('build/assets/image/galeri3.jpg') }}" alt="Asesor Sedang Menguji Room Attendant">
+                            <img src="{{ asset('image/galeri3.jpg') }}" alt="Asesor Sedang Menguji Room Attendant">
                             <span class="gallery-card-badge">Foto</span>
                         </div>
                         <div class="gallery-card-content">
@@ -449,7 +449,7 @@
                     
                     <div class="gallery-card">
                         <div class="gallery-card-image">
-                            <img src="{{ asset('build/assets/image/galeri4.webp') }}" alt="Fasilitas Restoran Pelatihan">
+                            <img src="{{ asset('image/galeri4.webp') }}"" alt="Fasilitas Restoran Pelatihan">
                             <span class="gallery-card-badge">Foto</span>
                         </div>
                         <div class="gallery-card-content">
@@ -460,7 +460,7 @@
 
                     <div class="gallery-card">
                         <div class="gallery-card-image">
-                            <img src="{{ asset('build/assets/image/galeri5.webp') }}" alt="Penyerahan Sertifikat">
+                            <img src="{{ asset('image/galeri5.webp') }}" alt="Penyerahan Sertifikat">
                             <span class="gallery-card-badge">Foto</span>
                         </div>
                         <div class="gallery-card-content">
@@ -471,7 +471,7 @@
                     
                     <div class="gallery-card">
                         <div class="gallery-card-image">
-                            <img src="{{ asset('build/assets/image/galeri6.webp') }}" alt="Gedung LSP">
+                            <img src="{{ asset('image/galeri6.webp') }}" alt="Gedung LSP">
                             <span class="gallery-card-badge">Foto</span>
                         </div>
                         <div class="gallery-card-content">
