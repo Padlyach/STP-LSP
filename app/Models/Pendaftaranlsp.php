@@ -12,15 +12,9 @@ class Pendaftaranlsp extends Model
     protected $table = 'pendaftaranlsps';
 
     protected $fillable = [
-        'nama',
-        'nisn',
-        'email',
-        'telepon',
-        'jenis_kelamin',
-        'tempat_lahir',
-        'tanggal_lahir',
-        'alamat',
-        'sekolah_asal',
-        'kompetensi',
-    ];
+    'email_google', 'nama', 'nik', 'tempat_lahir', 'tanggal_lahir', 
+    'alamat', 'telepon', 'email', 'program_studi', 'batch', 'skema',
+    'transkrip_nilai', 'sertifikat_otjt', 'reference_letter', 
+    'ktp_file', 'cv', 'kartu_mahasiswa', 'pas_foto'
+];
 }

@@ -154,8 +154,8 @@
 
         <header class="hero-section">
             <div class="max-w-7xl mx-auto px-4 hero-content">
-                <h1 class="hero-title">Pendaftaran Peserta</h1>
-                <p class="hero-subtitle">FORMULIR PENDAFTARAN SERTIFIKASI UJI KOMPETENSI</p>
+                <h1 class="hero-title">Input Sertifikat</h1>
+                <p class="hero-subtitle">Untuk Menambahkan Data Sertifikat</p>
                 <div class="badge-hero">📝 Isi data Anda dengan benar</div>
             </div>
         </header>
@@ -250,12 +250,12 @@
                         <div class="form-grid-2">
                             <div>
                                 <label class="form-label">Sertifikat Depan <span>*</span></label>
-                                <input type="file" name="sertifikat_depan" accept="image/*,application/pdf" required class="input-style file-input-style" onchange="checkFile(this)">
+                                <input type="file" name="sertifikat_depan" accept="image/*,application/pdf" required class="" onchange="checkFile(this)">
                             </div>
 
                             <div>
                                 <label class="form-label">Sertifikat Belakang <span>*</span></label>
-                                <input type="file" name="sertifikat_belakang" accept="image/*,application/pdf" required class="input-style file-input-style" onchange="checkFile(this)">
+                                <input type="file" name="sertifikat_belakang" accept="image/*,application/pdf" required class="" onchange="checkFile(this)">
                             </div>
                         </div>
 

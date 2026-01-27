@@ -3,114 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar - LSP STP Bogor</title>
+    <title>Navbar Admin - LSP STP Bogor</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-<nav class="nav-sticky">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center py-3 lg:py-4">
 
+<nav id="navbar" class="nav-sticky navbar-glass">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4 lg:py-5">
+
+            <!-- LOGO -->
             <div class="flex items-center space-x-3 group">
-                <a href="{{ route('beranda') }}" class="block">
+                <a href="{{ route('beranda') }}" class="block logo-container">
                     <img src="{{ asset('image/logostp.webp') }}"
                          alt="Logo LSP"
-                         class="object-contain transition-transform duration-300 group-hover:scale-110">
+                         class="h-12 lg:h-14 w-auto object-contain transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-2xl">
+                    <div class="logo-glow"></div>
                 </a>
             </div>
 
-            <ul class="hidden lg:flex items-center space-x-1 text-sm font-medium">
+            <!-- DESKTOP MENU -->
+            <ul class="hidden lg:flex items-center space-x-2 text-sm font-medium">
 
                 @auth
                     @if(Auth::user()->isAdmin())
-                    <li>
-                        <a href="{{ route('admin.pendaftaranlsp.index') }}" class="nav-link">List Pendaftaran</a>
-                    </li>
-                    
-                    <li>
-                        <a href="{{ route('admin.pendaftaransertifikat.create') }}" class="nav-link">Form Sertifikat</a>
-                    </li>
-
-                    <li>
-                        <a href="{{ route('admin.pendaftaransertifikat.index') }}" class="nav-link">List Sertifikat</a>
-                    </li>
-                    
-                    <li>
-                        <a href="{{ route('admin.users.index') }}" class="nav-link">List User</a>
-                    </li>
+                        <li>
+                            <a href="{{ route('admin.pendaftaranlsp.index') }}" class="nav-link bubble-btn">
+                                <span class="nav-link-text">List Pendaftaran</span>
+                                <div class="bubble-shine"></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.pendaftaransertifikat.create') }}" class="nav-link bubble-btn">
+                                <span class="nav-link-text">Form Sertifikat</span>
+                                <div class="bubble-shine"></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.pendaftaransertifikat.index') }}" class="nav-link bubble-btn">
+                                <span class="nav-link-text">List Sertifikat</span>
+                                <div class="bubble-shine"></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.users.index') }}" class="nav-link bubble-btn">
+                                <span class="nav-link-text">List User</span>
+                                <div class="bubble-shine"></div>
+                            </a>
+                        </li>
                     @endif
                 @endauth
 
-               
+                @auth
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <li>
+                            <a href="{{ route('logout') }}"
+                               class="nav-link-primary bubble-primary"
+                               onclick="event.preventDefault(); this.closest('form').submit();">
+                                <span class="relative z-10">Log Out</span>
+                                <div class="bubble-shine-primary"></div>
+                            </a>
+                        </li>
+                    </form>
+                @endauth
 
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+                @guest
                     <li>
-                        <a href="{{ route('logout') }}"
-                           class="nav-link-primary"
-                           onclick="event.preventDefault(); this.closest('form').submit();">
-                             Log Out
+                        <a href="{{ route('login') }}" class="nav-link bubble-btn">
+                            <span class="nav-link-text">Login</span>
+                            <div class="bubble-shine"></div>
                         </a>
                     </li>
-                </form>
+                    <li>
+                        <a href="{{ route('register') }}" class="nav-link-primary bubble-primary">
+                            <span class="relative z-10">Daftar</span>
+                            <div class="bubble-shine-primary"></div>
+                        </a>
+                    </li>
+                @endguest
+
             </ul>
 
-              <!-- SOCIAL MEDIA DESKTOP -->
-            <div class="hidden lg:flex items-center space-x-3">
-                <!-- Twitter -->
-                <a href="#" class="social-icon" title="Twitter">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M23.953 4.57a10 10 0 0 1-2.825.775 4.958 4.958 0 0 0 2.163-2.723 9.864 9.864 0 0 1-3.127 1.184A4.92 4.92 0 0 0 16.616 3c-2.717 0-4.917 2.28-4.917 5.086 0 .4.045.79.13 1.16C7.728 8.98 4.1 7.1 1.67 4.15a5.14 5.14 0 0 0-.666 2.56c0 1.78.87 3.35 2.19 4.27a4.903 4.903 0 0 1-2.23-.63v.06c0 2.48 1.73 4.55 4.03 5.03a4.996 4.996 0 0 1-2.224.086c.63 2.01 2.445 3.48 4.6 3.52A9.874 9.874 0 0 1 0 19.54 13.94 13.94 0 0 0 7.548 22c9.057 0 14.01-7.72 14.01-14.41 0-.22 0-.42-.016-.63A10.17 10.17 0 0 0 24 4.59z" />
-                    </svg>
-                </a>
-
-                <!-- Facebook -->
-                <a href="#" class="social-icon" title="Facebook">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M22.676 0H1.326C.595 0 0 .6 0 1.333v21.333C0 23.4.595 24 1.326 24H12.82v-9.333H9.692v-3.64h3.128V8.41c0-3.1 1.893-4.788 4.66-4.788 1.325 0 2.464.1 2.796.145v3.24l-1.92.001c-1.504 0-1.795.726-1.795 1.77v2.318h3.587l-.467 3.64h-3.12V24h6.118C23.405 24 24 23.4 24 22.667V1.333C24 .6 23.405 0 22.676 0z" />
-                    </svg>
-                </a>
-
-                <!-- Instagram -->
-                <a href="#" class="social-icon" title="Instagram">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.056 1.97.24 2.428.403a4.92 4.92 0 0 1 1.77 1.153 4.92 4.92 0 0 1 1.153 1.77c.163.457.347 1.257.403 2.428.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.24 1.97-.403 2.428a4.92 4.92 0 0 1-1.153 1.77 4.92 4.92 0 0 1-1.77 1.153c-.457.163-1.257.347-2.428.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.97-.24-2.428-.403a4.92 4.92 0 0 1-1.77-1.153 4.92 4.92 0 0 1-1.153-1.77c-.163-.457-.347-1.257-.403-2.428C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.056-1.17.24-1.97.403-2.428a4.92 4.92 0 0 1 1.153-1.77A4.92 4.92 0 0 1 5.559.566c.457-.163 1.257-.347 2.428-.403C9.253 2.174 9.633 2.163 12 2.163z" />
-                    </svg>
-                </a>
-            </div>
-
             <!-- MOBILE BUTTON -->
-            <button id="mobile-menu-btn" class="lg:hidden text-gray-700 hover:text-primary transition-colors duration-300 p-2 hover:bg-gray-100 rounded-lg">
+            <button id="mobile-menu-btn" class="bubble-menu-btn lg:hidden">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16"/>
                 </svg>
             </button>
         </div>
 
-        <div id="mobile-menu" class="mobile-menu lg:hidden bg-white border-t border-gray-100">
+        <!-- MOBILE MENU -->
+        <div id="mobile-menu" class="mobile-menu lg:hidden glass-mobile-menu">
 
             @auth
                 @if(Auth::user()->isAdmin())
-                <a href="{{ route('admin.pendaftaranlsp.index') }}" class="mobile-link">List Pendaftaran</a>
-                
-                <a href="{{ route('admin.pendaftaransertifikat.create') }}" class="mobile-link">Form Sertifikat</a>
-                <a href="{{ route('admin.pendaftaransertifikat.index') }}" class="mobile-link">List Sertifikat</a>
-                
-                <a href="{{ route('admin.users.index') }}" class="mobile-link">List User</a>
+                    <a href="{{ route('admin.pendaftaranlsp.index') }}" class="mobile-link bubble-mobile">
+                        <span>List Pendaftaran</span>
+                        <div class="mobile-shine"></div>
+                    </a>
+                    <a href="{{ route('admin.pendaftaransertifikat.create') }}" class="mobile-link bubble-mobile">
+                        <span>Form Sertifikat</span>
+                        <div class="mobile-shine"></div>
+                    </a>
+                    <a href="{{ route('admin.pendaftaransertifikat.index') }}" class="mobile-link bubble-mobile">
+                        <span>List Sertifikat</span>
+                        <div class="mobile-shine"></div>
+                    </a>
+                    <a href="{{ route('admin.users.index') }}" class="mobile-link bubble-mobile">
+                        <span>List User</span>
+                        <div class="mobile-shine"></div>
+                    </a>
                 @endif
             @endauth
-            
-           
 
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <a href="{{ route('logout') }}"
-                   class="mobile-link-primary"
-                   onclick="event.preventDefault(); this.closest('form').submit();">
-                     Log Out
+            @auth
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="{{ route('logout') }}"
+                       class="mobile-link-primary bubble-primary-mobile"
+                       onclick="event.preventDefault(); this.closest('form').submit();">
+                        <span class="relative z-10">Log Out</span>
+                        <div class="bubble-shine-primary"></div>
+                    </a>
+                </form>
+            @endauth
+
+            @guest
+                <a href="{{ route('login') }}" class="mobile-link bubble-mobile">
+                    <span>Login</span>
+                    <div class="mobile-shine"></div>
                 </a>
-            </form>
+                <a href="{{ route('register') }}" class="mobile-link-primary bubble-primary-mobile">
+                    <span class="relative z-10">Daftar</span>
+                    <div class="bubble-shine-primary"></div>
+                </a>
+            @endguest
+
         </div>
     </div>
 </nav>
@@ -125,386 +156,312 @@
         --color-primary: #0E7A4F;
         --color-primary-light: #10B981;
         --color-primary-dark: #065F46;
+        --glass-bg: rgba(255, 255, 255, 0.85);
+        --glass-border: rgba(255, 255, 255, 0.3);
     }
 
-    .nav-sticky {
+    /* Glassmorphism Navbar */
+    .navbar-glass {
         position: sticky;
         top: 0;
         z-index: 50;
-        background: white;
-        box-shadow: 0 2px 20px rgba(14, 122, 79, 0.08);
-        transition: box-shadow 0.3s ease;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border-bottom: 1px solid var(--glass-border);
+        box-shadow: 0 8px 32px rgba(14, 122, 79, 0.08),
+                    0 0 1px rgba(14, 122, 79, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .nav-sticky:hover {
-        box-shadow: 0 4px 30px rgba(14, 122, 79, 0.12);
+    .navbar-glass:hover {
+        box-shadow: 0 12px 48px rgba(14, 122, 79, 0.12),
+                    0 0 1px rgba(14, 122, 79, 0.15);
     }
 
-    /* Desktop Navigation Links */
-    .nav-link {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.5rem 1rem;
-        font-size: 0.95rem;
-        color: #4B5563;
-        font-weight: 500;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Logo Animation */
+    .logo-container {
         position: relative;
-        border-radius: 0.5rem;
-        text-decoration: none;
     }
 
-    .nav-link::after {
-        content: '';
+    .logo-glow {
         position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 0;
-        height: 2px;
-        background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        transform: translateX(-50%);
-    }
-
-    .nav-link:hover {
-        color: var(--color-primary);
-        background: rgba(16, 185, 129, 0.08);
-    }
-
-    .nav-link:hover::after {
-        width: 80%;
-    }
-
-    .nav-link-primary {
-        padding: 0.75rem 1.5rem;
-        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-        color: white;
-        border-radius: 0.75rem;
-        font-weight: 600;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 12px rgba(14, 122, 79, 0.3);
-        display: inline-flex;
-        align-items: center;
-        border: none;
-        cursor: pointer;
-        text-decoration: none;
-    }
-
-    .nav-link-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(14, 122, 79, 0.4);
-        background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
-    }
-
-    .nav-link-primary:active {
-        transform: translateY(0);
-    }
-
-    /* Dropdown Menus */
-    .dropdown-menu {
-        max-height: 0;
-        overflow: hidden;
+        inset: -10px;
+        background: radial-gradient(circle, rgba(16, 185, 129, 0.4), transparent 70%);
         opacity: 0;
-        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        transform: translateY(-10px);
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+        filter: blur(15px);
     }
 
-    .dropdown:hover .dropdown-menu {
-        max-height: 600px;
+    .logo-container:hover .logo-glow {
         opacity: 1;
-        transform: translateY(0);
     }
 
-    .dropdown-item {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: 0.875rem 1.25rem;
-        font-size: 0.875rem;
-        color: #4b5563;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Bubble Buttons - iPhone Style */
+    .bubble-btn {
         position: relative;
-        border-left: 3px solid transparent;
-        text-decoration: none;
-    }
-
-    .dropdown-item::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 3px;
-        background: linear-gradient(180deg, var(--color-primary-light), var(--color-primary));
-        transform: scaleY(0);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        transform-origin: top;
-    }
-
-    .dropdown-item:hover {
-        background: linear-gradient(90deg, rgba(16, 185, 129, 0.08), transparent);
-        color: var(--color-primary);
-        padding-left: 1.5rem;
-    }
-
-    .dropdown-item:hover::before {
-        transform: scaleY(1);
-    }
-
-    .dropdown-icon {
-        font-size: 1.25rem;
-        display: flex;
+        display: inline-flex;
         align-items: center;
-        min-width: 30px;
+        padding: 0.625rem 1.25rem;
+        font-size: 0.95rem;
+        color: #374151;
+        font-weight: 500;
+        border-radius: 50px;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+        text-decoration: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
 
-    /* Social Icons */
-    .social-icon {
+    .bubble-btn:hover {
+        background: rgba(16, 185, 129, 0.15);
+        border-color: rgba(16, 185, 129, 0.3);
+        color: var(--color-primary);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(14, 122, 79, 0.15),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    .bubble-btn:active {
+        transform: translateY(0) scale(0.98);
+    }
+
+    .bubble-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(255, 255, 255, 0.6), 
+            transparent);
+        transition: left 0.6s ease;
+        pointer-events: none;
+    }
+
+    .bubble-btn:hover .bubble-shine {
+        left: 200%;
+    }
+
+    /* Primary Bubble Button */
+    .bubble-primary {
+        position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: rgba(16, 185, 129, 0.1);
-        color: var(--color-primary);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        text-decoration: none;
-    }
-
-    .social-icon:hover {
-        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-        color: white;
-        transform: scale(1.1) rotate(5deg);
-        box-shadow: 0 6px 16px rgba(14, 122, 79, 0.3);
-    }
-
-    /* Mobile Menu */
-    .mobile-menu {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(209, 250, 229, 0.1));
-    }
-
-    .mobile-menu.active {
-        max-height: 1000px;
-    }
-
-    .mobile-link {
-        display: block;
-        padding: 1rem 1rem;
-        font-size: 1rem;
-        color: #4B5563;
-        font-weight: 500;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        border-radius: 0.5rem;
-        margin: 0.25rem 0.5rem;
-        position: relative;
-        text-decoration: none;
-    }
-
-    .mobile-link::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        width: 3px;
-        height: 0;
-        background: linear-gradient(180deg, var(--color-primary-light), var(--color-primary));
-        border-radius: 3px;
-        transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        transform: translateY(-50%);
-    }
-
-    .mobile-link:hover {
-        background: rgba(16, 185, 129, 0.1);
-        color: var(--color-primary);
-        padding-left: 1.5rem;
-    }
-
-    .mobile-link:hover::before {
-        height: 70%;
-    }
-
-    .mobile-link-primary {
-        display: block;
-        padding: 1rem 1rem;
-        font-size: 1rem;
-        font-weight: 600;
-        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-        color: white;
-        border-radius: 0.75rem;
-        margin: 0.5rem;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 12px rgba(14, 122, 79, 0.2);
-        text-align: center;
-        text-decoration: none;
-    }
-
-    .mobile-link-primary:active {
-        transform: scale(0.98);
-    }
-
-    .mobile-dropdown {
-        margin: 0.5rem 0;
-    }
-
-    .mobile-dropdown-btn {
-        width: 100%;
-        padding: 1rem;
-        text-align: left;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: #4B5563;
-        font-weight: 500;
-        background: rgba(16, 185, 129, 0.05);
-        border: none;
-        cursor: pointer;
-        border-radius: 0.5rem;
-        margin: 0.25rem 0.5rem;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        font-size: 1rem;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .mobile-dropdown-btn:active {
-        background: rgba(16, 185, 129, 0.15);
-        color: var(--color-primary);
-    }
-
-    .mobile-submenu {
-        display: none;
-        background: linear-gradient(135deg, rgba(209, 250, 229, 0.2), rgba(209, 250, 229, 0.1));
-        border-radius: 0.5rem;
-        margin: 0.5rem;
-        overflow: hidden;
-        animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    @keyframes slideDown {
-        from {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .mobile-sublink {
-        display: block;
-        padding: 0.875rem 1.5rem;
+        padding: 0.75rem 1.75rem;
         font-size: 0.95rem;
-        color: #4b5563;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        border-left: 3px solid transparent;
-        font-weight: 500;
+        font-weight: 600;
+        color: white;
+        border-radius: 50px;
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 15px rgba(14, 122, 79, 0.25),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
         text-decoration: none;
+        cursor: pointer;
     }
 
-    .mobile-sublink::before {
-        content: '';
+    .bubble-primary:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(14, 122, 79, 0.35),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+        background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+    }
+
+    .bubble-primary:active {
+        transform: translateY(-1px) scale(1.02);
+    }
+
+    .bubble-shine-primary {
         position: absolute;
-        left: 0;
         top: 0;
-        bottom: 0;
-        width: 3px;
-        background: linear-gradient(180deg, var(--color-primary-light), var(--color-primary));
-        transform: scaleY(0);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        transform-origin: top;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(255, 255, 255, 0.4), 
+            transparent);
+        transition: left 0.6s ease;
+        pointer-events: none;
     }
 
-    .mobile-sublink:hover {
-        color: var(--color-primary);
-        background: rgba(16, 185, 129, 0.1);
-        padding-left: 2rem;
+    .bubble-primary:hover .bubble-shine-primary {
+        left: 200%;
     }
 
-    .mobile-sublink:hover::before {
-        transform: scaleY(1);
-    }
-
-    .dropdown-arrow {
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        color: var(--color-primary);
-    }
-
-    .dropdown-arrow.rotate-180 {
-        transform: rotate(180deg);
-    }
-
-    .social-icon-mobile {
-        display: inline-flex;
+    /* Mobile Menu Button */
+    .bubble-menu-btn {
+        position: relative;
+        display: flex;
         align-items: center;
         justify-content: center;
         width: 44px;
         height: 44px;
-        border-radius: 0.75rem;
-        background: rgba(16, 185, 129, 0.1);
-        color: var(--color-primary);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        text-decoration: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: #374151;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        cursor: pointer;
     }
 
-    .social-icon-mobile:active {
-        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-        color: white;
+    .bubble-menu-btn:hover {
+        background: rgba(16, 185, 129, 0.15);
+        border-color: rgba(16, 185, 129, 0.3);
+        color: var(--color-primary);
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(14, 122, 79, 0.2);
+    }
+
+    .bubble-menu-btn:active {
         transform: scale(0.95);
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 1024px) {
-        .nav-link {
-            padding: 0.4rem 0.75rem;
-            font-size: 0.9rem;
-        }
+    /* Glass Mobile Menu */
+    .glass-mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border-top: 1px solid var(--glass-border);
+        margin-top: 0.5rem;
+        border-radius: 0 0 20px 20px;
+        padding: 0;
+    }
 
-        .dropdown-item {
-            padding: 0.75rem 1rem;
+    .glass-mobile-menu.active {
+        max-height: 1200px;
+        padding: 1rem 0;
+    }
+
+    /* Mobile Bubble Links */
+    .bubble-mobile {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        margin: 0.5rem 1rem;
+        font-size: 1rem;
+        color: #374151;
+        font-weight: 500;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .bubble-mobile:active {
+        background: rgba(16, 185, 129, 0.15);
+        border-color: rgba(16, 185, 129, 0.3);
+        color: var(--color-primary);
+        transform: scale(0.98);
+    }
+
+    .mobile-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(255, 255, 255, 0.6), 
+            transparent);
+        transition: left 0.6s ease;
+        pointer-events: none;
+    }
+
+    .bubble-mobile:active .mobile-shine {
+        left: 200%;
+    }
+
+    /* Mobile Primary Button */
+    .bubble-primary-mobile {
+        position: relative;
+        display: block;
+        padding: 1rem 1.5rem;
+        margin: 1rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: white;
+        text-align: center;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 15px rgba(14, 122, 79, 0.25),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+        text-decoration: none;
+    }
+
+    .bubble-primary-mobile:active {
+        transform: scale(0.98);
+        box-shadow: 0 2px 8px rgba(14, 122, 79, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .bubble-btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
         }
     }
 
     @media (max-width: 768px) {
-        .nav-link {
-            padding: 0.4rem 0.6rem;
-            font-size: 0.85rem;
-        }
-
-        .dropdown-item {
-            padding: 0.7rem 0.9rem;
-            font-size: 0.8rem;
-        }
-
-        .dropdown-icon {
-            font-size: 1rem;
+        .navbar-glass {
+            backdrop-filter: blur(15px) saturate(160%);
         }
     }
 
     @media (max-width: 640px) {
-        .mobile-link {
-            padding: 0.875rem 0.75rem;
-            font-size: 0.95rem;
-            margin: 0.2rem 0.4rem;
+        .bubble-mobile {
+            margin: 0.4rem 0.75rem;
+            padding: 0.875rem 1rem;
         }
 
-        .mobile-dropdown-btn {
-            padding: 0.875rem 0.75rem;
-            margin: 0.2rem 0.4rem;
-            font-size: 0.95rem;
+        .bubble-primary-mobile {
+            margin: 0.75rem;
         }
+    }
 
-        .mobile-sublink {
-            padding: 0.75rem 1.25rem;
-            font-size: 0.9rem;
+    /* Scroll Enhancement */
+    @media (prefers-reduced-motion: no-preference) {
+        * {
+            scroll-behavior: smooth;
         }
+    }
 
-        .mobile-sublink:hover {
-            padding-left: 1.75rem;
+    /* Touch Optimization */
+    @media (hover: none) {
+        .bubble-btn:hover,
+        .bubble-menu-btn:hover {
+            transform: none;
         }
     }
 </style>
@@ -516,36 +473,39 @@
     // Toggle mobile menu
     btn.addEventListener('click', () => {
         menu.classList.toggle('active');
-        btn.classList.toggle('bg-gray-100');
-    });
-
-    // Mobile dropdown functionality
-    document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const submenu = btn.nextElementSibling;
-            const arrow = btn.querySelector('.dropdown-arrow');
-            
-            // Close other submenus
-            document.querySelectorAll('.mobile-submenu').forEach(menu => {
-                if (menu !== submenu) {
-                    menu.style.display = 'none';
-                    menu.previousElementSibling.querySelector('.dropdown-arrow').classList.remove('rotate-180');
-                }
-            });
-
-            // Toggle current submenu
-            submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-            arrow.classList.toggle('rotate-180');
-        });
+        
+        // Animate menu button
+        const icon = btn.querySelector('svg');
+        if (menu.classList.contains('active')) {
+            icon.style.transform = 'rotate(90deg)';
+        } else {
+            icon.style.transform = 'rotate(0deg)';
+        }
     });
 
     // Close mobile menu when link is clicked
-    document.querySelectorAll('.mobile-link, .mobile-sublink, .mobile-link-primary').forEach(link => {
+    document.querySelectorAll('.mobile-link, .mobile-link-primary, .bubble-mobile, .bubble-primary-mobile').forEach(link => {
         link.addEventListener('click', () => {
             menu.classList.remove('active');
-            btn.classList.remove('bg-gray-100');
+            const icon = btn.querySelector('svg');
+            icon.style.transform = 'rotate(0deg)';
         });
+    });
+
+    // Add scroll effect to navbar
+    let lastScroll = 0;
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 100) {
+            navbar.style.boxShadow = '0 12px 48px rgba(14, 122, 79, 0.15), 0 0 1px rgba(14, 122, 79, 0.2)';
+        } else {
+            navbar.style.boxShadow = '0 8px 32px rgba(14, 122, 79, 0.08), 0 0 1px rgba(14, 122, 79, 0.1)';
+        }
+        
+        lastScroll = currentScroll;
     });
 </script>
 
