@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Berita Sertifikat - LSP STP Bogor</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
     <script>
@@ -21,100 +21,32 @@
                         'soft-gray': '#F9FAFB',
                     },
                     fontFamily: {
-                        'sans': ['Poppins', 'sans-serif'],
+                        'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
                     }
                 }
             }
         }
-         // hero section animation
-        const heroSection = document.querySelector('.hero-section');
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetX = 0;
-        let targetY = 0;
-        let isInHeroSection = false;
-
-        // Track mouse movement
-        document.addEventListener('mousemove', (e) => {
-            const rect = heroSection.getBoundingClientRect();
-            
-            // Check if mouse is in hero section
-            isInHeroSection = e.clientY >= rect.top && e.clientY <= rect.bottom;
-            
-            if (isInHeroSection) {
-                targetX = e.clientX - rect.left;
-                targetY = e.clientY - rect.top;
-            }
-        });
-
-        // Smooth animation loop
-        function animateLight() {
-            // Lerp (linear interpolation) for smooth following
-            mouseX += (targetX - mouseX) * 0.08;
-            mouseY += (targetY - mouseY) * 0.08;
-            
-            // Update CSS variables
-            heroSection.style.setProperty('--mouse-x', mouseX + 'px');
-            heroSection.style.setProperty('--mouse-y', mouseY + 'px');
-            
-            requestAnimationFrame(animateLight);
-        }
-
-        // Start animation loop
-        animateLight();
-
-        // Show/hide light effect based on hover
-        heroSection.addEventListener('mouseenter', () => {
-            heroSection.classList.add('mouse-active');
-        });
-
-        heroSection.addEventListener('mouseleave', () => {
-            heroSection.classList.remove('mouse-active');
-        });
-
-        // Particle interaction with mouse
-        const particles = document.querySelectorAll('.particle');
-        document.addEventListener('mousemove', (e) => {
-            const rect = heroSection.getBoundingClientRect();
-            
-            if (isInHeroSection) {
-                const angle = Math.atan2(
-                    e.clientY - rect.top - rect.height / 2, 
-                    e.clientX - rect.left - rect.width / 2
-                );
-                
-                particles.forEach((particle, index) => {
-                    const distance = (index + 1) * 3;
-                    const moveX = Math.cos(angle) * distance;
-                    const moveY = Math.sin(angle) * distance;
-                    
-                    particle.style.transform = `translate(${moveX}px, ${moveY}px)`;
-                });
-            }
-        });
-
-        // Reset particles on mouse leave
-        heroSection.addEventListener('mouseleave', () => {
-            particles.forEach(particle => {
-                particle.style.transform = 'translate(0, 0)';
-            });
-        });
     </script>
 
     <style>
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdfa 100%);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #f5f7fa;
             min-height: 100vh;
         }
 
         /* ============================================
-           SMOOTH FADE-IN ANIMATIONS
+           FADE-IN ANIMATIONS
            ============================================ */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -122,25 +54,35 @@
             }
         }
 
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         /* ============================================
-           CARD ITEM - MAIN STYLING
+           CARD CONTAINER - iPhone Bubble Style
            ============================================ */
-        .card-item {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fffe 50%, #f0fbf7 100%);
+        .card-container {
+            background: #ffffff;
+            border-radius: 28px;
             box-shadow: 
-                0 2px 8px rgba(14, 122, 79, 0.08),
-                0 10px 35px rgba(14, 122, 79, 0.12),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+                0 1px 3px rgba(0, 0, 0, 0.04),
+                0 8px 24px rgba(0, 0, 0, 0.06),
+                0 16px 48px rgba(0, 0, 0, 0.04);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-            border: 1.5px solid rgba(16, 185, 129, 0.35);
-            position: relative;
             overflow: hidden;
-            animation: fadeInUp 0.6s ease-out forwards;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            animation: fadeInScale 0.6s ease-out forwards;
             opacity: 0;
         }
 
-        /* Staggered animation delay untuk setiap card */
+        /* Staggered animation */
         .grid-container > div:nth-child(1) { animation-delay: 0.1s; }
         .grid-container > div:nth-child(2) { animation-delay: 0.2s; }
         .grid-container > div:nth-child(3) { animation-delay: 0.3s; }
@@ -148,82 +90,112 @@
         .grid-container > div:nth-child(5) { animation-delay: 0.5s; }
         .grid-container > div:nth-child(6) { animation-delay: 0.6s; }
 
-        /* Shine effect pada card */
-        .card-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-            transition: left 0.8s ease;
-            pointer-events: none;
-        }
-
-        .card-item:hover::before {
-            left: 100%;
-        }
-
-        /* Hover effect */
-        .card-item:hover {
-            transform: translateY(-10px);
+        .card-container:hover {
+            transform: translateY(-4px);
             box-shadow: 
-                0 2px 8px rgba(14, 122, 79, 0.1),
-                0 25px 50px rgba(14, 122, 79, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.9);
-            background: linear-gradient(135deg, #ffffff 0%, #f5fdfb 50%, #edfbf7 100%);
-            border-color: rgba(16, 185, 129, 0.5);
+                0 2px 6px rgba(0, 0, 0, 0.06),
+                0 12px 32px rgba(0, 0, 0, 0.08),
+                0 20px 56px rgba(0, 0, 0, 0.06);
         }
 
         /* ============================================
-           SERTIFIKAT ITEM STYLING
+           HEADER CARD
            ============================================ */
-        .sertifikat-item {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .card-header {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            padding: 2rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #065F46;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.02em;
+        }
+
+        .card-subtitle {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: #059669;
             display: flex;
-            flex-direction: column;
             align-items: center;
+            gap: 0.5rem;
         }
 
-        .sertifikat-item:hover {
-            transform: scale(1.03);
-            filter: drop-shadow(0 12px 25px rgba(14, 122, 79, 0.3));
+        .nim-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: #065F46;
+            padding: 0.375rem 0.875rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
         }
 
-        .sertifikat-item a {
-            display: block;
+        /* ============================================
+           CERTIFICATE PREVIEW - iPhone Style
+           ============================================ */
+        .certificate-section {
+            padding: 2rem;
+            background: #fafafa;
+        }
+
+        .certificate-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .certificate-card {
             position: relative;
-            border-radius: 1.25rem;
+            background: #ffffff;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(14, 122, 79, 0.18);
-            transition: all 0.3s ease;
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.04),
+                0 4px 16px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .certificate-card:hover {
+            transform: scale(1.02);
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.06),
+                0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .certificate-card:active {
+            transform: scale(0.98);
+        }
+
+        .certificate-image-wrapper {
+            position: relative;
             width: 100%;
-            height: 280px;
-            border: 2.5px solid rgba(16, 185, 129, 0.25);
+            padding-bottom: 70%;
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
         }
 
-        .sertifikat-item a:hover {
-            box-shadow: 0 15px 40px rgba(14, 122, 79, 0.28);
-            border-color: rgba(16, 185, 129, 0.45);
-        }
-
-        .sertifikat-item img {
+        .certificate-image {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.4s ease;
+            transition: transform 0.3s ease;
         }
 
-        .sertifikat-item a:hover img {
-            filter: brightness(1.1) contrast(1.08) saturate(1.05);
+        .certificate-card:hover .certificate-image {
+            transform: scale(1.05);
         }
 
-        /* Overlay effect */
-        .sertifikat-overlay {
+        .certificate-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(14, 122, 79, 0.5), rgba(14, 122, 79, 0.15));
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
             opacity: 0;
             transition: opacity 0.3s ease;
             display: flex;
@@ -231,193 +203,250 @@
             justify-content: center;
         }
 
-        .sertifikat-item a:hover .sertifikat-overlay {
+        .certificate-card:hover .certificate-overlay {
             opacity: 1;
         }
 
-        /* Label dengan animasi */
-        .sertifikat-label {
-            font-size: 1rem;
-            color: #0E7A4F;
-            font-weight: 700;
-            margin-top: 0.75rem;
+        .certificate-label {
+            padding: 0.75rem 1rem;
             text-align: center;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: #374151;
+            background: #ffffff;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
         }
 
-        .sertifikat-item:hover .sertifikat-label {
+        .view-button {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             color: #065F46;
-            transform: translateY(-3px);
+            padding: 0.625rem 1.25rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         /* ============================================
-           HEADER INFO SECTION
-           ============================================ */
-        .card-header-info {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.08) 100%);
-            border-bottom: 2px solid rgba(16, 185, 129, 0.2);
-        }
-
-        .card-header-info h2 {
-            color: #0E7A4F;
-            transition: all 0.3s ease;
-            font-size: 1.875rem;
-        }
-
-        .card-header-info p {
-            color: #0F766E;
-            font-size: 1rem;
-        }
-
-        /* ============================================
-           DIVIDER GRADIENT
-           ============================================ */
-        .divider-gradient {
-            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.4), transparent);
-            height: 2px;
-        }
-
-        /* ============================================
-           INFO SECTION STYLING
+           INFO SECTION - Bubble Cards
            ============================================ */
         .info-section {
-            animation: slideInUp 0.6s ease-out;
+            padding: 2rem;
+            background: #ffffff;
         }
 
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .info-grid {
+            display: grid;
+            gap: 1rem;
         }
 
-        /* Info item */
-        .info-item {
-            transition: all 0.3s ease;
-            padding: 1rem;
-            border-radius: 0.75rem;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.04) 100%);
-            border: 1.5px solid rgba(16, 185, 129, 0.2);
+        .info-bubble {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            border: 1px solid rgba(16, 185, 129, 0.15);
+            border-radius: 18px;
+            padding: 1.25rem 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .info-item:hover {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.08) 100%);
-            transform: translateX(5px);
-            border-color: rgba(16, 185, 129, 0.35);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.12);
+        .info-bubble:hover {
+            transform: translateX(4px);
+            background: linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%);
+            border-color: rgba(16, 185, 129, 0.25);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
         }
 
-        .info-item .label-text {
-            color: #0E7A4F;
-            font-weight: 700;
+        .info-label {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: #065F46;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.625rem;
+        }
+
+        .info-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1rem;
         }
 
-        .info-item .value-text {
-            color: #0F766E;
+        .info-value {
+            font-size: 0.9375rem;
             font-weight: 500;
-            font-size: 1rem;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .competency-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: #ffffff;
+            padding: 0.625rem 1.25rem;
+            border-radius: 14px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            box-shadow: 
+                0 2px 8px rgba(16, 185, 129, 0.25),
+                0 4px 16px rgba(16, 185, 129, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .competency-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 4px 12px rgba(16, 185, 129, 0.3),
+                0 8px 24px rgba(16, 185, 129, 0.2);
         }
 
         /* ============================================
-           BADGE KOMPETENSI
+           SECTION DIVIDER
            ============================================ */
-        .badge-kompetensi {
-            background: linear-gradient(135deg, #ccf0e8 0%, #b8e6d5 100%);
-            color: #065F46;
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.8125rem;
             font-weight: 700;
-            transition: all 0.3s ease;
-            border: 1.5px solid rgba(16, 185, 129, 0.4);
-            display: inline-block;
-            width: fit-content;
-            font-size: 0.95rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            padding: 0 2rem;
+            padding-top: 1.5rem;
         }
 
-        .badge-kompetensi:hover {
-            transform: scale(1.08);
-            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
-            background: linear-gradient(135deg, #b8e6d5 0%, #a5dcc8 100%);
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, rgba(16, 185, 129, 0.2), transparent);
         }
 
         /* ============================================
            EMPTY STATE
            ============================================ */
         .empty-state {
-            animation: fadeIn 0.5s ease-out;
-            background: linear-gradient(135deg, #ffffff 0%, #f8fffe 50%, #f0fbf7 100%);
-            border: 2px solid rgba(16, 185, 129, 0.3);
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: 
+                0 1px 3px rgba(0, 0, 0, 0.04),
+                0 8px 24px rgba(0, 0, 0, 0.06);
+            animation: fadeInScale 0.5s ease-out;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #10B981;
+            font-size: 2.5rem;
+        }
+
+        .empty-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-description {
+            font-size: 1rem;
+            color: #6b7280;
         }
 
         /* ============================================
            RESPONSIVE DESIGN
            ============================================ */
         @media (max-width: 768px) {
-            .sertifikat-item a {
-                height: 240px;
-            }
-
-            .grid-cols-2 {
-                gap: 1.5rem;
-            }
-
-            .px-6 {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
-            }
-
-            .p-6 {
-                padding: 1.5rem;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .sertifikat-item a {
-                height: 200px;
-            }
-
-            .grid-cols-2 {
+            .certificate-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
 
-            .px-6 {
-                padding-left: 1rem;
-                padding-right: 1rem;
+            .card-header {
+                padding: 1.5rem;
             }
 
-            .p-6 {
-                padding: 1rem;
-            }
-
-            .card-item {
-                margin: 0 -0.25rem;
-            }
-
-            .info-item {
-                padding: 0.75rem;
-            }
-
-            .card-header-info h2 {
+            .card-title {
                 font-size: 1.5rem;
+            }
+
+            .certificate-section,
+            .info-section {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                padding: 0 1.5rem;
+                padding-top: 1rem;
+            }
+
+            .info-bubble {
+                padding: 1rem 1.25rem;
             }
         }
 
+        @media (max-width: 640px) {
+            .card-header {
+                padding: 1.25rem;
+            }
+
+            .card-title {
+                font-size: 1.25rem;
+            }
+
+            .card-subtitle {
+                font-size: 0.875rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .certificate-section,
+            .info-section {
+                padding: 1.25rem;
+            }
+
+            .section-title {
+                padding: 0 1.25rem;
+                font-size: 0.75rem;
+            }
+
+            .info-bubble {
+                padding: 1rem;
+            }
+
+            .info-label {
+                font-size: 0.75rem;
+            }
+
+            .info-value {
+                font-size: 0.875rem;
+            }
+        }
+
+        /* ============================================
+           GRADIENT TITLE
+           ============================================ */
         .gradient-title {
-            background: linear-gradient(90deg, #0E7A4F 0%, #10B981 50%, #059669 100%);
+            background: linear-gradient(135deg, #0E7A4F 0%, #10B981 50%, #059669 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -434,132 +463,188 @@
                 transform: translateY(0);
             }
         }
+
+        /* ============================================
+           CONTACT INFO
+           ============================================ */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            color: #4b5563;
+            font-size: 0.875rem;
+        }
+
+        .contact-item:not(:last-child) {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
     </style>
-       <link rel="stylesheet" href="{{ asset('css/hero.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/hero.css') }}">
 </head>
 
 <body class="antialiased">
-       @include('partials.navbar')
-      <section class="hero-section">
-    <div class="hero-orb-1"></div>
-    <div class="hero-orb-2"></div>
-    <div class="hero-orb-3"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
+    @include('partials.navbar')
     
-    <div class="hero-content"> <div class="section-subtitle">Informasi Resmi Sertifikasi</div> <h1 class="hero-title">Berita Sertifikat</h1> <p class="hero-subtitle"> Menyajikan informasi terkini mengenai penerbitan, pembaruan, serta ketentuan resmi terkait sertifikat yang dikeluarkan oleh lembaga kami. </p> <button class="badge-hero">Lihat Berita</button> </div>
-</section>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+    <section class="hero-section">
+        <div class="hero-orb-1"></div>
+        <div class="hero-orb-2"></div>
+        <div class="hero-orb-3"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="section-subtitle">Informasi Resmi Sertifikasi</div>
+            <h1 class="hero-title">Berita Sertifikat</h1>
+            <p class="hero-subtitle">
+                Menyajikan informasi terkini mengenai penerbitan, pembaruan, serta ketentuan resmi terkait sertifikat yang dikeluarkan oleh lembaga kami.
+            </p>
+            <button class="badge-hero">Lihat Berita</button>
+        </div>
+    </section>
 
-      
-
-        <!-- Grid Container - 1 kolom -->
-        <div class="space-y-6 grid-container" id="sertifikatList">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        
+        <!-- Grid Container -->
+        <div class="space-y-8 grid-container" id="sertifikatList">
 
             {{-- LOOPING DATA DARI BACKEND (BLADE) --}}
             @forelse ($data as $d)
-            <div class="card-item bg-white rounded-2xl overflow-hidden border border-gray-100">
+            <div class="card-container">
 
-                <!-- Sertifikat Section Title -->
-                <div class="p-6 pb-3">
-                    <p class="text-base font-bold text-primary-dark flex items-center gap-2">
-                        <span class="text-2xl">🖼️</span> Dokumen Sertifikat
-                    </p>
+                <!-- Header Card -->
+                <div class="card-header">
+                    <h2 class="card-title">{{ $d->nama }}</h2>
+                    <div class="card-subtitle">
+                        <span>NIM</span>
+                        <span class="nim-badge">{{ $d->nim }}</span>
+                    </div>
                 </div>
 
-                <!-- Sertifikat Container - 2 kolom -->
-                <div class="grid grid-cols-2 gap-6 px-6 pb-6">
-                    <!-- Sertifikat Depan -->
-                    <div class="sertifikat-item">
-                        <a href="{{ asset('storage/' . $d->sertifikat_depan) }}" target="_blank"
-                            class="bg-gradient-to-br from-gray-100 to-gray-50">
-                            <img src="{{ asset('storage/' . $d->sertifikat_depan) }}" alt="Sertifikat Depan">
-                            <div class="sertifikat-overlay">
-                                <span class="text-white font-semibold text-lg">👁️ Lihat Penuh</span>
+                <!-- Certificate Section -->
+                <div class="section-title">
+                    <span>📜</span>
+                    <span>Dokumen Sertifikat</span>
+                </div>
+
+                <div class="certificate-section">
+                    <div class="certificate-grid">
+                        <!-- Certificate Front -->
+                        <div class="certificate-card">
+                            <a href="{{ asset('storage/' . $d->sertifikat_depan) }}" target="_blank">
+                                <div class="certificate-image-wrapper">
+                                    <img src="{{ asset('storage/' . $d->sertifikat_depan) }}" 
+                                         alt="Sertifikat Depan" 
+                                         class="certificate-image">
+                                    <div class="certificate-overlay">
+                                        <span class="view-button">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg>
+                                            Lihat Detail
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="certificate-label">Halaman Depan</div>
+                            </a>
+                        </div>
+
+                        <!-- Certificate Back -->
+                        <div class="certificate-card">
+                            <a href="{{ asset('storage/' . $d->sertifikat_belakang) }}" target="_blank">
+                                <div class="certificate-image-wrapper">
+                                    <img src="{{ asset('storage/' . $d->sertifikat_belakang) }}" 
+                                         alt="Sertifikat Belakang" 
+                                         class="certificate-image">
+                                    <div class="certificate-overlay">
+                                        <span class="view-button">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg>
+                                            Lihat Detail
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="certificate-label">Halaman Belakang</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Section -->
+                <div class="section-title">
+                    <span>ℹ️</span>
+                    <span>Informasi Detail</span>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-grid">
+                        
+                        <!-- Competency -->
+                        <div class="info-bubble">
+                            <div class="info-label">
+                                <span class="info-icon">🎓</span>
+                                <span>Kompetensi</span>
                             </div>
-                        </a>
-                        <p class="sertifikat-label">📍 Halaman Depan</p>
-                    </div>
-
-                    <!-- Sertifikat Belakang -->
-                    <div class="sertifikat-item">
-                        <a href="{{ asset('storage/' . $d->sertifikat_belakang) }}" target="_blank"
-                            class="bg-gradient-to-br from-gray-100 to-gray-50">
-                            <img src="{{ asset('storage/' . $d->sertifikat_belakang) }}" alt="Sertifikat Belakang">
-                            <div class="sertifikat-overlay">
-                                <span class="text-white font-semibold text-lg">👁️ Lihat Penuh</span>
+                            <div class="info-value">
+                                <span class="competency-badge">{{ $d->kompetensi }}</span>
                             </div>
-                        </a>
-                        <p class="sertifikat-label">📍 Halaman Belakang</p>
+                        </div>
+
+                        <!-- University -->
+                        <div class="info-bubble">
+                            <div class="info-label">
+                                <span class="info-icon">🏫</span>
+                                <span>Institusi Pendidikan</span>
+                            </div>
+                            <div class="info-value">{{ $d->nama_universitas }}</div>
+                        </div>
+
+                        <!-- Contact -->
+                        <div class="info-bubble">
+                            <div class="info-label">
+                                <span class="info-icon">📞</span>
+                                <span>Informasi Kontak</span>
+                            </div>
+                            <div class="info-value">
+                                <div class="contact-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span class="break-all">{{ $d->email }}</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                    <span>{{ $d->telepon }}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Divider -->
-                <div class="divider-gradient"></div>
-
-                <!-- Header Info -->
-                <div class="p-6 pt-4 card-header-info">
-                    <h2 class="text-primary-dark mb-1">{{ $d->nama }}</h2>
-                    <p class="font-semibold">NIM: <span class="text-primary-light font-bold">{{ $d->nim }}</span></p>
-                </div>
-
-                <!-- Info Details -->
-                <div class="space-y-2 p-6 pt-4 info-section">
-                    
-                    <!-- Kompetensi -->
-                    <div class="info-item">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="text-2xl">🎓</span>
-                            <span class="label-text">Kompetensi</span>
-                        </div>
-                        <span class="badge-kompetensi px-4 py-2 rounded-full">
-                            {{ $d->kompetensi }}
-                        </span>
-                    </div>
-
-                    <!-- Universitas -->
-                    <div class="info-item">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="text-2xl">🏫</span>
-                            <span class="label-text">Universitas</span>
-                        </div>
-                        <p class="value-text">{{ $d->nama_universitas }}</p>
-                    </div>
-
-                    <!-- Kontak -->
-                    <div class="info-item">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="text-2xl">📧</span>
-                            <span class="label-text">Kontak</span>
-                        </div>
-                        <p class="value-text break-all">{{ $d->email }}</p>
-                        <p class="text-gray-600 font-medium mt-1 text-sm">☎️ {{ $d->telepon }}</p>
-                    </div>
-                </div>
             </div>
             @empty
             {{-- EMPTY STATE --}}
-            <div>
-                <div
-                    class="empty-state text-center py-24 bg-white rounded-2xl shadow-lg border border-soft-green p-8 sm:p-16">
-                    <div class="mb-6">
-                        <svg class="w-24 h-24 mx-auto text-primary-light/30 mb-4" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                            </path>
-                        </svg>
-                    </div>
-                    <h3 class="text-gray-500 font-bold text-2xl mb-3">Belum Ada Pengumuman Sertifikat</h3>
-                    <p class="text-gray-400 text-lg">Silakan cek kembali secara berkala untuk update terbaru. ⏳</p>
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
                 </div>
+                <h3 class="empty-title">Belum Ada Pengumuman Sertifikat</h3>
+                <p class="empty-description">Silakan cek kembali secara berkala untuk update terbaru</p>
             </div>
             @endforelse
 
