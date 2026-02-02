@@ -186,7 +186,7 @@
                 @endauth
             </ul>
 
-            <button id="mobile-menu-btn" class="bubble-menu-btn lg:hidden">
+            <button id="mobile-menu-btn" class="bubble-menu-btn lg:hidden ">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M4 6h16M4 12h16M4 18h16"/>
@@ -569,6 +569,13 @@
 
     .bubble-menu-btn:active {
         transform: scale(0.95);
+    }
+
+    /* Hide menu button on desktop (lg breakpoint and above) */
+    @media (min-width: 1024px) {
+        .bubble-menu-btn {
+            display: none !important;
+        }
     }
 
     /* Glass Mobile Menu */
