@@ -22,6 +22,9 @@ class User extends Authenticatable
         'email',
         'password',
         'role', // Kolom ini akan kita gunakan untuk otorisasi
+        'avatar',
+        'nik',
+        'tanggal_lahir',
     ];
 
     /**

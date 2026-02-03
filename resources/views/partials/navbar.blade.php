@@ -172,17 +172,48 @@
                 @endguest
 
                 @auth
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <li>
-                        <a href="{{ route('logout') }}"
-                           class="nav-link-primary bubble-primary"
-                           onclick="event.preventDefault(); this.closest('form').submit();">
-                            <span class="relative z-10">Logout</span>
-                            <div class="bubble-shine-primary"></div>
-                        </a>
-                    </li>
-                </form>
+          <div class="relative">
+    <!-- Avatar -->
+    <button
+        type="button"
+        onclick="toggleDropdown()"
+        class="focus:outline-none"
+    >
+        <img
+            src="{{ Auth::user()->avatar
+                ? asset('storage/' . Auth::user()->avatar)
+                : asset('default-avatar.png') }}"
+            class="w-8 h-8 rounded-full border"
+            alt="Avatar"
+        >
+    </button>
+
+    <!-- Dropdown -->
+    <div
+        id="avatarDropdown"
+        class="hidden absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg overflow-hidden z-50"
+    >
+        <a
+            href="{{ route('profile.edit') }}"
+            class="block px-4 py-2 text-sm hover:bg-gray-100"
+        >
+            Edit Profile
+        </a>
+
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button
+                type="submit"
+                class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-red-600"
+            >
+                Logout
+            </button>
+        </form>
+    </div>
+</div>
+
+
+                
                 @endauth
             </ul>
 
@@ -894,3 +925,18 @@
 
 </body>
 </html>
+
+<script>
+    function toggleDropdown() {
+        document.getElementById('avatarDropdown').classList.toggle('hidden');
+    }
+
+    // klik di luar → nutup dropdown
+    document.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('avatarDropdown');
+        if (!e.target.closest('.relative')) {
+            dropdown.classList.add('hidden');
+        }
+    });
+</script>
+s
