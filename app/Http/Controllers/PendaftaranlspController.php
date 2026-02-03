@@ -17,6 +17,61 @@ class PendaftaranlspController extends Controller
         return view('listpendaftaran', compact('data'));
     }
 
+    public function export()
+    {
+        $data = Pendaftaranlsp::orderBy('created_at', 'desc')->get();
+        $filename = "pendaftaran_lsp_export_" . date('Y-m-d_H-i-s') . ".csv";
+
+        $headers = [
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=$filename",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        ];
+
+        $columns = [
+            'Nama', 'NIK', 'Email', 'Email Google', 'Telepon', 
+            'Tempat Lahir', 'Tanggal Lahir', 'Alamat', 
+            'Program Studi', 'Batch', 'Skema', 'Tanggal Daftar'
+        ];
+
+        $callback = function() use ($data, $columns) {
+            $file = fopen('php://output', 'w');
+            
+            // Add BOM for Excel UTF-8 compatibility
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+
+            // Use semicolon (;) delimiter for Indonesian Excel compatibility
+            fputcsv($file, $columns, ';');
+
+            foreach ($data as $p) {
+                $row['Nama'] = $p->nama;
+                $row['NIK'] = "'".$p->nik; // Add quote to prevent scientific notation/trimming of NIK
+                $row['Email'] = $p->email;
+                $row['Email Google'] = $p->email_google;
+                $row['Telepon'] = "'".$p->telepon; // Add quote for phone number
+                $row['Tempat Lahir'] = $p->tempat_lahir;
+                $row['Tanggal Lahir'] = $p->tanggal_lahir;
+                $row['Alamat'] = $p->alamat;
+                $row['Program Studi'] = $p->program_studi;
+                $row['Batch'] = $p->batch;
+                $row['Skema'] = $p->skema;
+                $row['Tanggal Daftar'] = $p->created_at->format('Y-m-d H:i');
+
+                fputcsv($file, array(
+                    $row['Nama'], $row['NIK'], $row['Email'], $row['Email Google'], $row['Telepon'],
+                    $row['Tempat Lahir'], $row['Tanggal Lahir'], $row['Alamat'],
+                    $row['Program Studi'], $row['Batch'], $row['Skema'], $row['Tanggal Daftar']
+                ), ';');
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
     /**
      * Menampilkan halaman formulir pendaftaran (Akses User).
      */

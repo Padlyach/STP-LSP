@@ -19,8 +19,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
 
     // USERS
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/users/export', [UserController::class, 'export'])->name('users.export');
-
+    
     // DASHBOARD
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
@@ -29,6 +28,8 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     // ADMIN - LIST PENDAFTARAN LSP
     Route::get('/pendaftaranlsp/list', [PendaftaranlspController::class, 'index'])
         ->name('pendaftaranlsp.index');
+    Route::get('/pendaftaranlsp/export', [PendaftaranlspController::class, 'export'])
+        ->name('pendaftaranlsp.export');
     Route::get('/pendaftaranlsp/{id}/edit', [PendaftaranlspController::class, 'edit'])
         ->name('pendaftaranlsp.edit');
     Route::put('/pendaftaranlsp/{id}', [PendaftaranlspController::class, 'update'])
