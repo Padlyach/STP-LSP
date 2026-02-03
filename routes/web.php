@@ -87,7 +87,9 @@ Route::prefix('sertifikasi')->group(function () {
 
 Route::get('/galeri', fn() => view('galeri'))->name('galeri');
 Route::get('/kontak', fn() => view('kontak'))->name('kontak');
-Route::get('/pendaftaran', fn() => view('pendaftaran'))->name('pendaftaran');
+Route::get('/pendaftaran', fn() => view('pendaftaran'))
+    ->middleware('auth')
+    ->name('pendaftaran');
 
 Route::prefix('sertifikat')->group(function () {
     Route::get('/commispastry', fn() => view('sertifikat.commispastry'))->name('sertifikat.commispastry');
