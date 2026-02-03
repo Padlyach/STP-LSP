@@ -162,6 +162,12 @@
         </div>
 
         <!-- Table Section -->
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-gray-800">Data Pengguna</h3>
+            <a href="{{ route('admin.users.export') }}" class="btn-primary text-white px-6 py-2 rounded-lg font-medium shadow-lg flex items-center gap-2">
+                📥 Export Excel
+            </a>
+        </div>
         <div class="card-shadow bg-white rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full">

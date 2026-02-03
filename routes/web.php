@@ -5,6 +5,7 @@ use App\Http\Controllers\PendaftaranlspController;
 use App\Http\Controllers\PendaftaranSertifikatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\UserController;
 
 /// jangan di hapus
 Route::get('/', action: function() {
@@ -17,10 +18,8 @@ Route::get('/', action: function() {
 Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(function () {
 
     // USERS
-    Route::get('/users', function () {
-        $users = \App\Models\User::all();
-        return view('admin.users.index', compact('users'));
-    })->name('users.index');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/export', [UserController::class, 'export'])->name('users.export');
 
     // DASHBOARD
     Route::get('/dashboard', function () {
