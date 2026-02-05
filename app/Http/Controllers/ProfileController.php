@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 
 class ProfileController extends Controller
@@ -26,16 +27,20 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+public function update(ProfileUpdateRequest $request): RedirectResponse
 {
     $user = $request->user();
 
-    $user->fill($request->validated());
+    // ❌ jangan ikutkan password
+    $user->fill(
+        $request->safe()->except('password')
+    );
 
     if ($user->isDirty('email')) {
         $user->email_verified_at = null;
     }
 
+    // avatar
     if ($request->hasFile('avatar')) {
         if ($user->avatar) {
             Storage::delete('public/' . $user->avatar);
@@ -44,9 +49,15 @@ class ProfileController extends Controller
         $user->avatar = $request->file('avatar')->store('avatars', 'public');
     }
 
+    // 🔐 password hanya kalau diisi
+    if ($request->filled('password')) {
+        $user->password = Hash::make($request->password);
+    }
+
     $user->save();
 
-    return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    return Redirect::route('profile.edit')
+        ->with('status', 'profile-updated');
 }
 
 
