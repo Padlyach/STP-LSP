@@ -172,52 +172,92 @@
                 @endguest
 
                 @auth
-          <div class="relative">
-    <!-- Avatar -->
-    <button
-        type="button"
-        onclick="toggleDropdown()"
-        class="focus:outline-none"
-    >
-        <img
-            src="{{ Auth::user()->avatar
-                ? asset('storage/' . Auth::user()->avatar)
-                : asset('default-avatar.png') }}"
-            class="w-8 h-8 rounded-full border"
-            alt="Avatar"
-        >
-    </button>
+                <li class="relative profile-dropdown-wrapper">
+                    <button
+                        type="button"
+                        onclick="toggleDropdown()"
+                        class="profile-avatar-btn focus:outline-none"
+                    >
+                        <div class="avatar-wrapper">
+                            @if(Auth::user()->avatar)
+                                <img
+                                    src="{{ asset('storage/' . Auth::user()->avatar) }}"
+                                    class="avatar-image"
+                                    alt="Avatar"
+                                >
+                            @else
+                                <div class="avatar-default">
+                                    <svg class="avatar-icon" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                    </svg>
+                                </div>
+                            @endif
+                            <div class="avatar-ring"></div>
+                            <div class="avatar-status"></div>
+                        </div>
+                    </button>
 
-    <!-- Dropdown -->
-    <div
-        id="avatarDropdown"
-        class="hidden absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg overflow-hidden z-50"
-    >
-        <a
-            href="{{ route('profile.edit') }}"
-            class="block px-4 py-2 text-sm hover:bg-gray-100"
-        >
-            Edit Profile
-        </a>
+                    <div
+                        id="avatarDropdown"
+                        class="profile-dropdown hidden"
+                    >
+                        <div class="profile-dropdown-header">
+                            <div class="profile-info">
+                                @if(Auth::user()->avatar)
+                                    <img
+                                        src="{{ asset('storage/' . Auth::user()->avatar) }}"
+                                        class="profile-avatar-small"
+                                        alt="Avatar"
+                                    >
+                                @else
+                                    <div class="profile-avatar-small-default">
+                                        <svg class="profile-avatar-icon" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                @endif
+                                <div class="profile-details">
+                                    <div class="profile-name">{{ Auth::user()->name ?? 'User' }}</div>
+                                    <div class="profile-email">{{ Auth::user()->email ?? '' }}</div>
+                                </div>
+                            </div>
+                        </div>
 
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button
-                type="submit"
-                class="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-red-600"
-            >
-                Logout
-            </button>
-        </form>
-    </div>
-</div>
+                        <div class="profile-dropdown-divider"></div>
 
+                        <a
+                            href="{{ route('profile.edit') }}"
+                            class="profile-dropdown-item"
+                        >
+                            <svg class="profile-item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                            <span>Edit Profile</span>
+                            <svg class="profile-item-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
 
-                
+                        <div class="profile-dropdown-divider"></div>
+
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button
+                                type="submit"
+                                class="profile-dropdown-item profile-dropdown-logout"
+                            >
+                                <svg class="profile-item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                </svg>
+                                <span>Logout</span>
+                            </button>
+                        </form>
+                    </div>
+                </li>
                 @endauth
             </ul>
 
-            <button id="mobile-menu-btn" class="bubble-menu-btn lg:hidden ">
+            <button id="mobile-menu-btn" class="bubble-menu-btn lg:hidden">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M4 6h16M4 12h16M4 18h16"/>
@@ -226,8 +266,6 @@
         </div>
 
         <div id="mobile-menu" class="mobile-menu lg:hidden glass-mobile-menu">
-             <!-- MOBILE BUTTON -->
-           
             <a href="{{ route('beranda') }}" class="mobile-link bubble-mobile">
                 <span>Beranda</span>
                 <div class="mobile-shine"></div>
@@ -319,15 +357,45 @@
             @endguest
 
             @auth
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <a href="{{ route('logout') }}" 
-                   class="mobile-link-primary bubble-primary-mobile" 
-                   onclick="event.preventDefault(); this.closest('form').submit();">
-                    <span class="relative z-10">Logout</span>
-                    <div class="bubble-shine-primary"></div>
+            <!-- Mobile Profile Section -->
+            <div class="mobile-profile-section">
+                <div class="mobile-profile-header">
+                    @if(Auth::user()->avatar)
+                        <img
+                            src="{{ asset('storage/' . Auth::user()->avatar) }}"
+                            class="mobile-profile-avatar"
+                            alt="Avatar"
+                        >
+                    @else
+                        <div class="mobile-profile-avatar-default">
+                            <svg class="mobile-avatar-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                    @endif
+                    <div class="mobile-profile-info">
+                        <div class="mobile-profile-name">{{ Auth::user()->name ?? 'User' }}</div>
+                        <div class="mobile-profile-email">{{ Auth::user()->email ?? '' }}</div>
+                    </div>
+                </div>
+                
+                <a href="{{ route('profile.edit') }}" class="mobile-profile-link">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    <span>Edit Profile</span>
                 </a>
-            </form>
+                
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="mobile-profile-logout">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                        <span>Logout</span>
+                    </button>
+                </form>
+            </div>
             @endauth
         </div>
     </div>
@@ -570,6 +638,276 @@
         box-shadow: 0 4px 12px rgba(14, 122, 79, 0.3);
     }
 
+    /* Profile Avatar Button - Desktop */
+    .profile-avatar-btn {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .avatar-wrapper {
+        position: relative;
+        width: 44px;
+        height: 44px;
+    }
+
+    .avatar-image {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 4px 12px rgba(14, 122, 79, 0.15),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Default Avatar Icon - Desktop */
+    .avatar-default {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #E5E7EB 0%, #D1D5DB 100%);
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 4px 12px rgba(14, 122, 79, 0.15),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .avatar-icon {
+        width: 26px;
+        height: 26px;
+        color: #9CA3AF;
+        transition: all 0.3s ease;
+    }
+
+    .profile-avatar-btn:hover .avatar-default {
+        transform: scale(1.1);
+        background: linear-gradient(135deg, #D1D5DB 0%, #9CA3AF 100%);
+        border-color: var(--color-primary-light);
+        box-shadow: 0 6px 20px rgba(14, 122, 79, 0.3);
+    }
+
+    .profile-avatar-btn:hover .avatar-icon {
+        color: #6B7280;
+        transform: scale(1.1);
+    }
+
+    .avatar-ring {
+        position: absolute;
+        inset: -3px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: -1;
+    }
+
+    .avatar-status {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        width: 12px;
+        height: 12px;
+        background: linear-gradient(135deg, #10B981, #059669);
+        border: 2px solid white;
+        border-radius: 50%;
+        box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+        transition: all 0.3s ease;
+    }
+
+    .profile-avatar-btn:hover .avatar-image {
+        transform: scale(1.1);
+        border-color: var(--color-primary-light);
+        box-shadow: 0 6px 20px rgba(14, 122, 79, 0.3);
+    }
+
+    .profile-avatar-btn:hover .avatar-ring {
+        opacity: 1;
+        inset: -5px;
+    }
+
+    .profile-avatar-btn:hover .avatar-status {
+        transform: scale(1.2);
+        box-shadow: 0 3px 10px rgba(16, 185, 129, 0.6);
+    }
+
+    .profile-avatar-btn:active .avatar-image {
+        transform: scale(1.05);
+    }
+
+    /* Profile Dropdown - Desktop */
+    .profile-dropdown {
+        position: absolute;
+        right: 0;
+        margin-top: 0.75rem;
+        width: 280px;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border-radius: 20px;
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 20px 60px rgba(14, 122, 79, 0.2),
+                    0 0 1px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+        z-index: 60;
+    }
+
+    .profile-dropdown:not(.hidden) {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: all;
+    }
+
+    .profile-dropdown-header {
+        padding: 1.25rem;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(14, 122, 79, 0.05));
+        border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+    }
+
+    .profile-info {
+        display: flex;
+        align-items: center;
+        gap: 0.875rem;
+    }
+
+    .profile-avatar-small {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid white;
+        box-shadow: 0 4px 12px rgba(14, 122, 79, 0.2);
+    }
+
+    /* Default Avatar Small - Dropdown */
+    .profile-avatar-small-default {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #E5E7EB 0%, #D1D5DB 100%);
+        border: 2px solid white;
+        box-shadow: 0 4px 12px rgba(14, 122, 79, 0.2);
+    }
+
+    .profile-avatar-icon {
+        width: 28px;
+        height: 28px;
+        color: #9CA3AF;
+    }
+
+    .profile-details {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .profile-name {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.125rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .profile-email {
+        font-size: 0.8rem;
+        color: #6b7280;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .profile-dropdown-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.2), transparent);
+        margin: 0.5rem 0;
+    }
+
+    .profile-dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.875rem 1.25rem;
+        font-size: 0.9rem;
+        color: #4b5563;
+        font-weight: 500;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        width: 100%;
+        text-align: left;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .profile-dropdown-item:hover {
+        background: rgba(16, 185, 129, 0.08);
+        color: var(--color-primary);
+        padding-left: 1.5rem;
+    }
+
+    .profile-item-icon {
+        width: 20px;
+        height: 20px;
+        color: var(--color-primary);
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .profile-dropdown-item:hover .profile-item-icon {
+        transform: scale(1.15);
+    }
+
+    .profile-item-arrow {
+        width: 16px;
+        height: 16px;
+        color: #9ca3af;
+        margin-left: auto;
+        opacity: 0;
+        transform: translateX(-5px);
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .profile-dropdown-item:hover .profile-item-arrow {
+        opacity: 1;
+        transform: translateX(0);
+        color: var(--color-primary);
+    }
+
+    .profile-dropdown-logout {
+        color: #dc2626;
+    }
+
+    .profile-dropdown-logout:hover {
+        background: rgba(220, 38, 38, 0.08);
+        color: #dc2626;
+    }
+
+    .profile-dropdown-logout .profile-item-icon {
+        color: #dc2626;
+    }
+
+    .profile-dropdown-logout:hover .profile-item-arrow {
+        color: #dc2626;
+    }
+
     /* Mobile Menu Button */
     .bubble-menu-btn {
         position: relative;
@@ -602,13 +940,6 @@
         transform: scale(0.95);
     }
 
-    /* Hide menu button on desktop (lg breakpoint and above) */
-    @media (min-width: 1024px) {
-        .bubble-menu-btn {
-            display: none !important;
-        }
-    }
-
     /* Glass Mobile Menu */
     .glass-mobile-menu {
         max-height: 0;
@@ -624,7 +955,7 @@
     }
 
     .glass-mobile-menu.active {
-        max-height: 1200px;
+        max-height: 1500px;
         padding: 1rem 0;
     }
 
@@ -789,6 +1120,122 @@
                     inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
+    /* Mobile Profile Section */
+    .mobile-profile-section {
+        margin: 1rem;
+        padding: 1.25rem;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        box-shadow: 0 4px 15px rgba(14, 122, 79, 0.1);
+    }
+
+    .mobile-profile-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+        margin-bottom: 0.75rem;
+    }
+
+    .mobile-profile-avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid white;
+        box-shadow: 0 4px 12px rgba(14, 122, 79, 0.2);
+    }
+
+    /* Mobile Default Avatar */
+    .mobile-profile-avatar-default {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #E5E7EB 0%, #D1D5DB 100%);
+        border: 3px solid white;
+        box-shadow: 0 4px 12px rgba(14, 122, 79, 0.2);
+        flex-shrink: 0;
+    }
+
+    .mobile-avatar-icon {
+        width: 30px;
+        height: 30px;
+        color: #9CA3AF;
+    }
+
+    .mobile-profile-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .mobile-profile-name {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.125rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .mobile-profile-email {
+        font-size: 0.85rem;
+        color: #6b7280;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .mobile-profile-link {
+        display: flex;
+        align-items: center;
+        gap: 0.875rem;
+        padding: 0.875rem 1rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #4b5563;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 14px;
+        border: 1px solid rgba(16, 185, 129, 0.15);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+    }
+
+    .mobile-profile-link:active {
+        background: rgba(16, 185, 129, 0.15);
+        color: var(--color-primary);
+        transform: scale(0.98);
+    }
+
+    .mobile-profile-logout {
+        display: flex;
+        align-items: center;
+        gap: 0.875rem;
+        padding: 0.875rem 1rem;
+        width: 100%;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #dc2626;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 14px;
+        border: 1px solid rgba(220, 38, 38, 0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .mobile-profile-logout:active {
+        background: rgba(220, 38, 38, 0.1);
+        transform: scale(0.98);
+    }
+
     /* Dropdown Arrow Animation */
     .dropdown-arrow {
         transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -835,21 +1282,16 @@
         .bubble-primary-mobile {
             margin: 0.75rem;
         }
-    }
 
-    /* Scroll Enhancement */
-    @media (prefers-reduced-motion: no-preference) {
-        * {
-            scroll-behavior: smooth;
+        .mobile-profile-section {
+            margin: 0.75rem;
         }
     }
 
-    /* Touch Optimization */
-    @media (hover: none) {
-        .bubble-btn:hover,
-        .glass-item:hover,
-        .bubble-menu-btn:hover {
-            transform: none;
+    /* Hide menu button on desktop */
+    @media (min-width: 1024px) {
+        .bubble-menu-btn {
+            display: none !important;
         }
     }
 </style>
@@ -921,21 +1363,23 @@
         
         lastScroll = currentScroll;
     });
-</script>
 
-</body>
-</html>
-
-<script>
+    // Desktop profile dropdown toggle
     function toggleDropdown() {
-        document.getElementById('avatarDropdown').classList.toggle('hidden');
+        const dropdown = document.getElementById('avatarDropdown');
+        dropdown.classList.toggle('hidden');
     }
 
-    // klik di luar → nutup dropdown
+    // Click outside to close dropdown
     document.addEventListener('click', function (e) {
         const dropdown = document.getElementById('avatarDropdown');
-        if (!e.target.closest('.relative')) {
+        const profileWrapper = document.querySelector('.profile-dropdown-wrapper');
+        
+        if (profileWrapper && !profileWrapper.contains(e.target)) {
             dropdown.classList.add('hidden');
         }
     });
 </script>
+
+</body>
+</html>

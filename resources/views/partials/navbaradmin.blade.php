@@ -52,21 +52,60 @@
                                 <div class="bubble-shine"></div>
                             </a>
                         </li>
-                    @endif
-                @endauth
 
-                @auth
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <li>
-                            <a href="{{ route('logout') }}"
-                               class="nav-link-primary bubble-primary"
-                               onclick="event.preventDefault(); this.closest('form').submit();">
-                                <span class="relative z-10">Log Out</span>
-                                <div class="bubble-shine-primary"></div>
-                            </a>
+                        <!-- Admin Profile Dropdown -->
+                        <li class="relative admin-profile-wrapper">
+                            <button
+                                type="button"
+                                onclick="toggleAdminDropdown()"
+                                class="admin-profile-btn focus:outline-none"
+                            >
+                                <div class="admin-avatar-default">
+                                    <svg class="admin-avatar-icon" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                    </svg>
+                                </div>
+                                <span class="admin-name">{{ Auth::user()->name ?? 'Admin' }}</span>
+                                <svg class="admin-dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </button>
+
+                            <div
+                                id="adminDropdown"
+                                class="admin-dropdown hidden"
+                            >
+                                <div class="admin-dropdown-header">
+                                    <div class="admin-info">
+                                        <div class="admin-avatar-small-default">
+                                            <svg class="admin-avatar-icon-small" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="admin-details">
+                                            <div class="admin-name-text">{{ Auth::user()->name ?? 'Admin' }}</div>
+                                            <div class="admin-role">Administrator</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="admin-dropdown-divider"></div>
+
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button
+                                        type="submit"
+                                        class="admin-dropdown-item admin-dropdown-logout"
+                                    >
+                                        <svg class="admin-item-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                        </svg>
+                                        <span>Logout</span>
+                                    </button>
+                                </form>
+                            </div>
                         </li>
-                    </form>
+                    @endif
                 @endauth
 
                 @guest
@@ -116,19 +155,32 @@
                         <span>List User</span>
                         <div class="mobile-shine"></div>
                     </a>
-                @endif
-            @endauth
 
-            @auth
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <a href="{{ route('logout') }}"
-                       class="mobile-link-primary bubble-primary-mobile"
-                       onclick="event.preventDefault(); this.closest('form').submit();">
-                        <span class="relative z-10">Log Out</span>
-                        <div class="bubble-shine-primary"></div>
-                    </a>
-                </form>
+                    <!-- Mobile Admin Profile Section -->
+                    <div class="mobile-admin-section">
+                        <div class="mobile-admin-header">
+                            <div class="mobile-admin-avatar-default">
+                                <svg class="mobile-admin-icon" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                            </div>
+                            <div class="mobile-admin-info">
+                                <div class="mobile-admin-name">{{ Auth::user()->name ?? 'Admin' }}</div>
+                                <div class="mobile-admin-role">Administrator</div>
+                            </div>
+                        </div>
+                        
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="mobile-admin-logout">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                </svg>
+                                <span>Logout</span>
+                            </button>
+                        </form>
+                    </div>
+                @endif
             @endauth
 
             @guest
@@ -301,6 +353,209 @@
         left: 200%;
     }
 
+    /* Admin Profile Button - Desktop */
+    .admin-profile-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        padding: 0.5rem 1rem 0.5rem 0.5rem;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .admin-profile-btn:hover {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(14, 122, 79, 0.15);
+    }
+
+    .admin-avatar-default {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #E5E7EB 0%, #D1D5DB 100%);
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 2px 8px rgba(14, 122, 79, 0.1);
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .admin-avatar-icon {
+        width: 20px;
+        height: 20px;
+        color: #9CA3AF;
+        transition: all 0.3s ease;
+    }
+
+    .admin-profile-btn:hover .admin-avatar-default {
+        background: linear-gradient(135deg, #D1D5DB 0%, #9CA3AF 100%);
+        transform: scale(1.05);
+    }
+
+    .admin-profile-btn:hover .admin-avatar-icon {
+        color: #6B7280;
+    }
+
+    .admin-name {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #374151;
+        max-width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: color 0.3s ease;
+    }
+
+    .admin-profile-btn:hover .admin-name {
+        color: var(--color-primary);
+    }
+
+    .admin-dropdown-arrow {
+        width: 16px;
+        height: 16px;
+        color: #9CA3AF;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .admin-profile-btn:hover .admin-dropdown-arrow {
+        color: var(--color-primary);
+        transform: rotate(180deg);
+    }
+
+    /* Admin Dropdown - Desktop */
+    .admin-dropdown {
+        position: absolute;
+        right: 0;
+        margin-top: 0.75rem;
+        width: 240px;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border-radius: 20px;
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 20px 60px rgba(14, 122, 79, 0.2),
+                    0 0 1px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+        z-index: 60;
+    }
+
+    .admin-dropdown:not(.hidden) {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: all;
+    }
+
+    .admin-dropdown-header {
+        padding: 1.25rem;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(14, 122, 79, 0.05));
+        border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+    }
+
+    .admin-info {
+        display: flex;
+        align-items: center;
+        gap: 0.875rem;
+    }
+
+    .admin-avatar-small-default {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #E5E7EB 0%, #D1D5DB 100%);
+        border: 2px solid white;
+        box-shadow: 0 4px 12px rgba(14, 122, 79, 0.2);
+        flex-shrink: 0;
+    }
+
+    .admin-avatar-icon-small {
+        width: 26px;
+        height: 26px;
+        color: #9CA3AF;
+    }
+
+    .admin-details {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .admin-name-text {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.125rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .admin-role {
+        font-size: 0.8rem;
+        color: var(--color-primary);
+        font-weight: 500;
+    }
+
+    .admin-dropdown-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.2), transparent);
+        margin: 0.5rem 0;
+    }
+
+    .admin-dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.875rem 1.25rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        width: 100%;
+        text-align: left;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .admin-dropdown-logout {
+        color: #dc2626;
+    }
+
+    .admin-dropdown-logout:hover {
+        background: rgba(220, 38, 38, 0.08);
+        padding-left: 1.5rem;
+    }
+
+    .admin-item-icon {
+        width: 20px;
+        height: 20px;
+        color: #dc2626;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .admin-dropdown-logout:hover .admin-item-icon {
+        transform: scale(1.15);
+    }
+
     /* Mobile Menu Button */
     .bubble-menu-btn {
         position: relative;
@@ -348,7 +603,7 @@
     }
 
     .glass-mobile-menu.active {
-        max-height: 1200px;
+        max-height: 1500px;
         padding: 1rem 0;
     }
 
@@ -425,6 +680,88 @@
                     inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
+    /* Mobile Admin Profile Section */
+    .mobile-admin-section {
+        margin: 1rem;
+        padding: 1.25rem;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        box-shadow: 0 4px 15px rgba(14, 122, 79, 0.1);
+    }
+
+    .mobile-admin-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+        margin-bottom: 0.75rem;
+    }
+
+    .mobile-admin-avatar-default {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #E5E7EB 0%, #D1D5DB 100%);
+        border: 3px solid white;
+        box-shadow: 0 4px 12px rgba(14, 122, 79, 0.2);
+        flex-shrink: 0;
+    }
+
+    .mobile-admin-icon {
+        width: 30px;
+        height: 30px;
+        color: #9CA3AF;
+    }
+
+    .mobile-admin-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .mobile-admin-name {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.125rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .mobile-admin-role {
+        font-size: 0.85rem;
+        color: var(--color-primary);
+        font-weight: 500;
+    }
+
+    .mobile-admin-logout {
+        display: flex;
+        align-items: center;
+        gap: 0.875rem;
+        padding: 0.875rem 1rem;
+        width: 100%;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #dc2626;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 14px;
+        border: 1px solid rgba(220, 38, 38, 0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .mobile-admin-logout:active {
+        background: rgba(220, 38, 38, 0.1);
+        transform: scale(0.98);
+    }
+
     /* Responsive Design */
     @media (max-width: 1024px) {
         .bubble-btn {
@@ -448,20 +785,16 @@
         .bubble-primary-mobile {
             margin: 0.75rem;
         }
-    }
 
-    /* Scroll Enhancement */
-    @media (prefers-reduced-motion: no-preference) {
-        * {
-            scroll-behavior: smooth;
+        .mobile-admin-section {
+            margin: 0.75rem;
         }
     }
 
-    /* Touch Optimization */
-    @media (hover: none) {
-        .bubble-btn:hover,
-        .bubble-menu-btn:hover {
-            transform: none;
+    /* Hide menu button on desktop */
+    @media (min-width: 1024px) {
+        .bubble-menu-btn {
+            display: none !important;
         }
     }
 </style>
@@ -506,6 +839,22 @@
         }
         
         lastScroll = currentScroll;
+    });
+
+    // Admin dropdown toggle
+    function toggleAdminDropdown() {
+        const dropdown = document.getElementById('adminDropdown');
+        dropdown.classList.toggle('hidden');
+    }
+
+    // Click outside to close dropdown
+    document.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('adminDropdown');
+        const adminWrapper = document.querySelector('.admin-profile-wrapper');
+        
+        if (adminWrapper && !adminWrapper.contains(e.target)) {
+            dropdown.classList.add('hidden');
+        }
     });
 </script>
 
