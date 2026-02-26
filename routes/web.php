@@ -52,6 +52,10 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->name('admin.')->group(f
     // SIMPAN FORM
     Route::post('/pendaftaransertifikat', [PendaftaranSertifikatController::class, 'store'])
         ->name('pendaftaransertifikat.store');
+
+    // HAPUS DATA
+    Route::delete('/pendaftaransertifikat/{id}', [PendaftaranSertifikatController::class, 'destroy'])
+    ->name('pendaftaransertifikat.destroy');
 });
 
 // =======================

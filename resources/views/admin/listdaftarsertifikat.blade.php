@@ -277,6 +277,7 @@
                                 <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider column-kompetensi">Kompetensi</th>
                                 <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider column-alamat">Alamat</th>
                                 <th class="px-4 py-3 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">Dokumen</th>
+                                <th class="px-4 py-3 text-center text-xs font-bold text-gray-700 uppercase">Aksi</th>
                             </tr>
                         </thead>
 
@@ -336,6 +337,19 @@
                                             class="w-full h-full object-cover transition duration-150 ease-in-out">
                                     </a>
                                 </td>
+                                <td class="px-4 py-3 text-center">
+    <form action="{{ route('admin.pendaftaransertifikat.destroy', $d->id) }}" 
+          method="POST"
+          onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+        @csrf
+        @method('DELETE')
+
+        <button type="submit"
+            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm font-semibold shadow-md transition">
+            🗑 Hapus
+        </button>
+    </form>
+</td>
                             </tr>
 
                             @empty

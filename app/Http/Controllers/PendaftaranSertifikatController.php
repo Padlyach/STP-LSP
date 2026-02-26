@@ -76,4 +76,24 @@ class PendaftaranSertifikatController extends Controller
     $data = PendaftaranSertifikat::all();
     return view('beritasertifikat', compact('data'));
 }
+
+public function destroy($id)
+{
+    $data = PendaftaranSertifikat::findOrFail($id);
+
+    // Hapus file dari storage
+    if ($data->sertifikat_depan && \Storage::exists('public/' . $data->sertifikat_depan)) {
+        \Storage::delete('public/' . $data->sertifikat_depan);
+    }
+
+    if ($data->sertifikat_belakang && \Storage::exists('public/' . $data->sertifikat_belakang)) {
+        \Storage::delete('public/' . $data->sertifikat_belakang);
+    }
+
+    // Hapus data dari database
+    $data->delete();
+
+    return redirect()->route('admin.pendaftaransertifikat.index')
+        ->with('success', 'Data berhasil dihapus!');
+}
 }

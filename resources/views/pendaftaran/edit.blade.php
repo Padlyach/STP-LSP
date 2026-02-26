@@ -50,113 +50,114 @@
 
             <!-- FORM -->
             <form action="{{ route('admin.pendaftaranlsp.update', $data->id) }}" method="POST" class="space-y-6">
-                @csrf
-                @method('PUT')
+    @csrf
+    @method('PUT')
 
-                <!-- NAMA -->
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Nama Lengkap</label>
-                    <input type="text" name="nama" value="{{ old('nama', $data->nama) }}"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-light focus:border-primary outline-none transition">
-                </div>
+    {{-- NAMA --}}
+    <div>
+        <label class="block font-semibold mb-1">Nama Lengkap</label>
+        <input type="text" name="nama"
+            value="{{ old('nama', $data->nama) }}"
+            class="w-full px-4 py-3 border rounded-lg">
+    </div>
 
-                <!-- EMAIL & TELEPON -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Email</label>
-                        <input type="email" name="email" value="{{ old('email', $data->email) }}"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-light focus:border-primary outline-none transition">
-                    </div>
+    {{-- EMAIL & TELEPON --}}
+    <div class="grid grid-cols-2 gap-6">
+        <div>
+            <label class="block font-semibold mb-1">Email</label>
+            <input type="email" name="email"
+                value="{{ old('email', $data->email) }}"
+                class="w-full px-4 py-3 border rounded-lg">
+        </div>
 
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Telepon</label>
-                        <input type="text" name="telepon" value="{{ old('telepon', $data->telepon) }}"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-light focus:border-primary outline-none transition">
-                    </div>
-                </div>
+        <div>
+            <label class="block font-semibold mb-1">Telepon</label>
+            <input type="text" name="telepon"
+                value="{{ old('telepon', $data->telepon) }}"
+                class="w-full px-4 py-3 border rounded-lg">
+        </div>
+    </div>
 
-                <!-- SEKOLAH -->
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Sekolah Asal</label>
-                    <input type="text" name="sekolah_asal" value="{{ old('sekolah_asal', $data->sekolah_asal) }}"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-light focus:border-primary outline-none transition">
-                </div>
+    {{-- PROGRAM STUDI --}}
+    <div>
+        <label class="block font-semibold mb-1">Program Studi</label>
+        <input type="text" name="program_studi"
+            value="{{ old('program_studi', $data->program_studi) }}"
+            class="w-full px-4 py-3 border rounded-lg">
+    </div>
 
-                <!-- KOMPETENSI -->
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Kompetensi</label>
-                    <select name="kompetensi"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-white focus:ring-2 focus:ring-primary-light focus:border-primary outline-none transition">
+    {{-- BATCH --}}
+    <div>
+        <label class="block font-semibold mb-1">Batch</label>
+        <input type="text" name="batch"
+            value="{{ old('batch', $data->batch) }}"
+            class="w-full px-4 py-3 border rounded-lg">
+    </div>
 
-                        <option value="" disabled>Pilih kompetensi</option>
+    {{-- SKEMA --}}
+    <div>
+        <label class="block font-semibold mb-1">Skema</label>
+        <select name="skema" class="w-full px-4 py-3 border rounded-lg">
+            <option value="Receptionist"
+                {{ old('skema', $data->skema) == 'Receptionist' ? 'selected' : '' }}>
+                Receptionist
+            </option>
 
-                        <option value="Waiter/Waitress" {{ old('kompetensi', $data->kompetensi) == 'Waiter/Waitress' ? 'selected' : '' }}>
-                            Waiter / Waitress
-                        </option>
+            <option value="Waiter"
+                {{ old('skema', $data->skema) == 'Waiter' ? 'selected' : '' }}>
+                Waiter
+            </option>
 
-                        <option value="Receptionist" {{ old('kompetensi', $data->kompetensi) == 'Receptionist' ? 'selected' : '' }}>
-                            Receptionist
-                        </option>
+            <option value="Room Attendant"
+                {{ old('skema', $data->skema) == 'Room Attendant' ? 'selected' : '' }}>
+                Room Attendant
+            </option>
 
-                        <option value="Housekeeping" {{ old('kompetensi', $data->kompetensi) == 'Housekeeping' ? 'selected' : '' }}>
-                            Housekeeping
-                        </option>
+            <option value="Commis Pastry"
+                {{ old('skema', $data->skema) == 'Commis Pastry' ? 'selected' : '' }}>
+                Commis Pastry
+            </option>
+        </select>
+    </div>
 
-                        <option value="Kitchen" {{ old('kompetensi', $data->kompetensi) == 'Kitchen' ? 'selected' : '' }}>
-                            Kitchen
-                        </option>
+    {{-- TEMPAT & TANGGAL LAHIR --}}
+    <div class="grid grid-cols-2 gap-6">
+        <div>
+            <label class="block font-semibold mb-1">Tempat Lahir</label>
+            <input type="text" name="tempat_lahir"
+                value="{{ old('tempat_lahir', $data->tempat_lahir) }}"
+                class="w-full px-4 py-3 border rounded-lg">
+        </div>
 
-                    </select>
-                </div>
+        <div>
+            <label class="block font-semibold mb-1">Tanggal Lahir</label>
+            <input type="date" name="tanggal_lahir"
+                value="{{ old('tanggal_lahir', $data->tanggal_lahir) }}"
+                class="w-full px-4 py-3 border rounded-lg">
+        </div>
+    </div>
 
-                <!-- TEMPAT & TANGGAL LAHIR -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Tempat Lahir</label>
-                        <input type="text" name="tempat_lahir" value="{{ old('tempat_lahir', $data->tempat_lahir) }}"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-light focus:border-primary outline-none transition">
-                    </div>
+    {{-- ALAMAT --}}
+    <div>
+        <label class="block font-semibold mb-1">Alamat</label>
+        <textarea name="alamat"
+            class="w-full px-4 py-3 border rounded-lg"
+            rows="3">{{ old('alamat', $data->alamat) }}</textarea>
+    </div>
 
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-1">Tanggal Lahir</label>
-                        <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir', $data->tanggal_lahir) }}"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-light focus:border-primary outline-none transition">
-                    </div>
-                </div>
+    {{-- BUTTON --}}
+    <div class="flex justify-between pt-6">
+        <a href="{{ route('admin.pendaftaranlsp.index') }}"
+            class="px-6 py-2 bg-gray-200 rounded-lg">
+            Kembali
+        </a>
 
-                <!-- JENIS KELAMIN -->
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Jenis Kelamin</label>
-                    <select name="jenis_kelamin"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-white focus:ring-2 focus:ring-primary-light focus:border-primary outline-none transition">
-
-                        <option value="" disabled>Pilih jenis kelamin</option>
-
-                        <option value="Laki-laki" {{ old('jenis_kelamin', $data->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>
-                            Laki-laki
-                        </option>
-
-                        <option value="Perempuan" {{ old('jenis_kelamin', $data->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>
-                            Perempuan
-                        </option>
-                    </select>
-                </div>
-
-                <!-- BUTTON -->
-                <div class="flex justify-between items-center pt-6">
-                    <a href="{{ route('admin.pendaftaranlsp.index') }}"
-                        class="px-6 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition shadow-sm">
-                        Kembali
-                    </a>
-
-                    <button type="submit"
-                        class="px-10 py-3 bg-gradient-to-r from-primary to-primary-light hover:opacity-90 text-white font-semibold rounded-xl shadow-lg hover:shadow-primary/40 transition transform hover:-translate-y-1">
-                        Simpan Perubahan
-                    </button>
-                </div>
-
-            </form>
-
+        <button type="submit"
+            class="px-10 py-3 bg-green-600 text-white rounded-lg">
+            Simpan Perubahan
+        </button>
+    </div>
+</form>
         </div>
 
     </main>
