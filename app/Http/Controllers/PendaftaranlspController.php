@@ -158,9 +158,28 @@ class PendaftaranlspController extends Controller
             'tanggal_lahir' => 'required|date',
             'tempat_lahir'  => 'required|string',
             'alamat'        => 'required|string',
+
+            // File validation
+            'transkrip_nilai'  => 'nullable|file|mimes:pdf,jpg,png|max:2048',
+            'sertifikat_otjt'  => 'nullable|file|mimes:pdf,jpg,png|max:2048',
+            'reference_letter' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
+            'ktp_file'         => 'nullable|file|mimes:jpg,png,pdf|max:2048',
+            'cv'               => 'nullable|file|mimes:pdf|max:2048',
+            'kartu_mahasiswa'  => 'nullable|file|mimes:jpg,png,pdf|max:2048',
+            'pas_foto'         => 'nullable|image|max:2048',
         ]);
 
         $data = Pendaftaranlsp::findOrFail($id);
+
+        // Handle File Uploads
+        $fileFields = ['transkrip_nilai', 'sertifikat_otjt', 'reference_letter', 'ktp_file', 'cv', 'kartu_mahasiswa', 'pas_foto'];
+        foreach ($fileFields as $field) {
+            if ($request->hasFile($field)) {
+                $path = $request->file($field)->store('pendaftaran_lsp', 'public');
+                $validated[$field] = $path;
+            }
+        }
+
         $data->update($validated);
 
         return redirect()
